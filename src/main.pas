@@ -70,20 +70,29 @@ type
     Splitter4: TSplitter;
     tbLogs: TTabSheet;
     tbSettings: TTabSheet;
+    tmrStartUp: TTimer;
     procedure btn_Save_SettingsClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure spd_FwdComCheckClick(Sender: TObject);
     procedure spd_SrcComCheckClick(Sender: TObject);
+    procedure tmrStartUpTimer(Sender: TObject);
   private
     { private declarations }
     procedure EnumComPorts(lst:TStrings);
-    procedure LoadComponentValue(cmp: TComponent; iniF: TInifile);
+    procedure LoadComponentValue(cmp: TComponent);
     procedure LogAdd(LogWindow: TMemo; s: string);
-    procedure SaveComponentValue(cmp: TComponent; iniF: TInifile);
+    procedure SaveComponentValue(cmp: TComponent);
+
+    procedure SaveConf;
+    procedure LoadConf;
+
   public
     { public declarations }
   end;
+
+const
+   max_log_line=10000;
 
 var
   frmMain: TfrmMain;
@@ -101,7 +110,8 @@ implementation
 
 procedure TfrmMain.FormShow(Sender: TObject);
 begin
-  Caption:=Application.Title;
+  Caption:=Application.Title+' '+ProgramVersion;
+  tmrStartUp.Enabled:=True;
 end;
 
 procedure TfrmMain.spd_FwdComCheckClick(Sender: TObject);
@@ -124,6 +134,13 @@ begin
   cmb_SrcCommPort.DroppedDown:=True;
 end;
 
+procedure TfrmMain.tmrStartUpTimer(Sender: TObject);
+begin
+  tmrStartUp.Enabled:=False;
+  LogAdd(mem_General,'Started');
+  LoadConf;
+end;
+
 procedure TfrmMain.EnumComPorts(lst: TStrings);
 begin
   if not Assigned(lst) then
@@ -134,8 +151,13 @@ begin
 end;
 
 procedure TfrmMain.LogAdd(LogWindow: TMemo; s: string);
+var
+  log_time_str:String;
 begin
-  //
+  if LogWindow.Lines.Count>max_log_line then
+    LogWindow.Clear;
+  log_time_str:=FormatDateTime('DD.MM.YY HH:NN:SS.ZZZ',now);
+  LogWindow.Lines.Add(log_time_str+' : '+s);
 end;
 
 procedure TfrmMain.FormCreate(Sender: TObject);
@@ -147,10 +169,10 @@ end;
 
 procedure TfrmMain.btn_Save_SettingsClick(Sender: TObject);
 begin
-
+  SaveConf;
 end;
 
-procedure TfrmMain.LoadComponentValue(cmp: TComponent; iniF: TInifile);
+procedure TfrmMain.LoadComponentValue(cmp: TComponent);
 const
    section = 'COMP';
 begin
@@ -188,7 +210,7 @@ begin
 
 end;
 
-procedure TfrmMain.SaveComponentValue(cmp: TComponent; iniF: TInifile);
+procedure TfrmMain.SaveComponentValue(cmp: TComponent);
 const
    section = 'COMP';
 begin
@@ -223,6 +245,70 @@ begin
       iniF.WriteInteger(section,cmp.Name+'.Font.Color', Font.Color );
       iniF.WriteInteger(section,cmp.Name+'.Font.Size', Font.Size );
     end;
+
+end;
+
+procedure TfrmMain.SaveConf;
+begin
+  SaveComponentValue(cmb_SrcCommBaud);
+  SaveComponentValue(cmb_SrcCommDataBit);
+  SaveComponentValue(cmb_SrcCommParity);
+  SaveComponentValue(cmb_SrcCommPort);
+  SaveComponentValue(cmb_SrcCommStopBit);
+
+  SaveComponentValue(cmb_FwdCommBaud);
+  SaveComponentValue(cmb_FwdCommDataBit);
+  SaveComponentValue(cmb_FwdCommParity);
+  SaveComponentValue(cmb_FwdCommPort);
+  SaveComponentValue(cmb_FwdCommStopBit);
+
+  SaveComponentValue(chk_SrcRxDsrSensivity);
+  SaveComponentValue(chk_SrcRxDtrEnable);
+  SaveComponentValue(chk_SrcRxRtsEnable);
+  SaveComponentValue(chk_SrcXonXoff);
+
+  SaveComponentValue(chk_FwdRxDsrSensivity);
+  SaveComponentValue(chk_FwdRxDtrEnable);
+  SaveComponentValue(chk_FwdRxRtsEnable);
+  SaveComponentValue(chk_FwdXonXoff);
+
+  SaveComponentValue(edt_SrcRxBuffSize);
+  SaveComponentValue(edt_SrcTxBuffSize);
+
+  SaveComponentValue(edt_FwdRxBuffSize);
+  SaveComponentValue(edt_FwdTxBuffSize);
+
+end;
+
+procedure TfrmMain.LoadConf;
+begin
+  LoadComponentValue(cmb_SrcCommBaud);
+  LoadComponentValue(cmb_SrcCommDataBit);
+  LoadComponentValue(cmb_SrcCommParity);
+  LoadComponentValue(cmb_SrcCommPort);
+  LoadComponentValue(cmb_SrcCommStopBit);
+
+  LoadComponentValue(cmb_FwdCommBaud);
+  LoadComponentValue(cmb_FwdCommDataBit);
+  LoadComponentValue(cmb_FwdCommParity);
+  LoadComponentValue(cmb_FwdCommPort);
+  LoadComponentValue(cmb_FwdCommStopBit);
+
+  LoadComponentValue(chk_SrcRxDsrSensivity);
+  LoadComponentValue(chk_SrcRxDtrEnable);
+  LoadComponentValue(chk_SrcRxRtsEnable);
+  LoadComponentValue(chk_SrcXonXoff);
+
+  LoadComponentValue(chk_FwdRxDsrSensivity);
+  LoadComponentValue(chk_FwdRxDtrEnable);
+  LoadComponentValue(chk_FwdRxRtsEnable);
+  LoadComponentValue(chk_FwdXonXoff);
+
+  LoadComponentValue(edt_SrcRxBuffSize);
+  LoadComponentValue(edt_SrcTxBuffSize);
+
+  LoadComponentValue(edt_FwdRxBuffSize);
+  LoadComponentValue(edt_FwdTxBuffSize);
 
 end;
 
