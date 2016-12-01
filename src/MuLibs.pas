@@ -458,7 +458,7 @@ begin
     GetProgramVersion(ver);
   {$EndIf}
   {$IfDef WINDOWS}
-    ver:=Sto_GetFmtFileVersion(ApplicationName);
+    ver:=Sto_GetFmtFileVersion(ParamStr(0));
   {$EndIf}
   Result:='V:'+ver;
 end;

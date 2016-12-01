@@ -5,7 +5,8 @@ unit main;
 interface
 
 uses
-  Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, ComCtrls,
+  Classes, SysUtils, FileUtil, SynEdit, SynHighlighterAny,
+  synhighlighterunixshellscript, Forms, Controls, Graphics, Dialogs, ComCtrls,
   ExtCtrls, StdCtrls, Buttons, LazSerial
 
   , synaser
@@ -66,12 +67,16 @@ type
     LazSerSrc: TLazSerial;
     LazSerFwd: TLazSerial;
     mem_General: TMemo;
-    pnl_LogTopMenu: TPanel;
     pnl_LogsMain: TPanel;
+    pnl_LogTopMenu: TPanel;
     pgMain: TPageControl;
     spd_SrcComCheck: TSpeedButton;
     spd_FwdComCheck: TSpeedButton;
-    Splitter4: TSplitter;
+    spl_Logs: TSplitter;
+    spl_Bottom: TSplitter;
+    SynAnySyn1: TSynAnySyn;
+    synedt_Hex: TSynEdit;
+    synedt_Text: TSynEdit;
     tbLogs: TTabSheet;
     tbSettings: TTabSheet;
     tmrStartUp: TTimer;
@@ -79,9 +84,13 @@ type
     procedure btn_SrcOpenComClick(Sender: TObject);
     procedure btn_Save_SettingsClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure FormResize(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure LazSerFwdRxData(Sender: TObject);
+    procedure LazSerSrcRxData(Sender: TObject);
     procedure spd_FwdComCheckClick(Sender: TObject);
     procedure spd_SrcComCheckClick(Sender: TObject);
+    procedure synedt_HexChange(Sender: TObject);
     procedure tmrStartUpTimer(Sender: TObject);
   private
     procedure AppException(Sender: TObject; E: Exception);
@@ -125,6 +134,34 @@ begin
   tmrStartUp.Enabled:=True;
 end;
 
+procedure TfrmMain.LazSerFwdRxData(Sender: TObject);
+var
+  s:String;
+begin
+  s:=LazSerFwd.ReadData;
+  if s<>'' then
+    if LazSerSrc.Active then
+    begin
+      LazSerSrc.WriteData(s);
+      LogAdd(TMemo(synedt_Hex),'RCV: '+StrToHex(s));
+      LogAdd(TMemo(synedt_Text),'RCV: '+s);
+    end;
+end;
+
+procedure TfrmMain.LazSerSrcRxData(Sender: TObject);
+var
+  s:String;
+begin
+  s:=LazSerSrc.ReadData;
+  if s<>'' then
+    if LazSerFwd.Active then
+    begin
+      LazSerFwd.WriteData(s);
+      LogAdd(TMemo(synedt_Hex),'SND: '+StrToHex(s));
+      LogAdd(TMemo(synedt_Text),'SND: '+s);
+    end;
+end;
+
 procedure TfrmMain.spd_FwdComCheckClick(Sender: TObject);
 begin
   try
@@ -143,6 +180,11 @@ begin
     LogAdd(mem_General,'Exception: Com port listing error!');
   end;
   cmb_SrcCommPort.DroppedDown:=True;
+end;
+
+procedure TfrmMain.synedt_HexChange(Sender: TObject);
+begin
+
 end;
 
 procedure TfrmMain.tmrStartUpTimer(Sender: TObject);
@@ -177,6 +219,11 @@ begin
   IniFName := AppPath+PathDelim+'settings.ini';
   IniF := TIniFile.Create(IniFName);
   Application.OnException:=@AppException;
+end;
+
+procedure TfrmMain.FormResize(Sender: TObject);
+begin
+  synedt_Hex.Width:= pnl_LogsMain.ClientWidth div 2;
 end;
 
 procedure TfrmMain.btn_Save_SettingsClick(Sender: TObject);
