@@ -1,7 +1,7 @@
 object frmMain: TfrmMain
-  Left = 305
+  Left = 301
   Height = 539
-  Top = 103
+  Top = 55
   Width = 819
   Caption = 'Main'
   ClientHeight = 539
@@ -48,11 +48,47 @@ object frmMain: TfrmMain
       end
       object pnl_LogsMain: TPanel
         Left = 0
-        Height = 428
-        Top = 0
+        Height = 389
+        Top = 39
         Width = 813
         Align = alClient
         TabOrder = 2
+      end
+      object pnl_LogTopMenu: TPanel
+        Left = 0
+        Height = 39
+        Top = 0
+        Width = 813
+        Align = alTop
+        ClientHeight = 39
+        ClientWidth = 813
+        TabOrder = 3
+        object btn_SrcOpenCom: TButton
+          Left = 104
+          Height = 29
+          Top = 5
+          Width = 104
+          Caption = 'Source Start'
+          OnClick = btn_SrcOpenComClick
+          TabOrder = 0
+        end
+        object Label1: TLabel
+          Left = 12
+          Height = 15
+          Top = 13
+          Width = 81
+          Caption = 'Open Comms'
+          ParentColor = False
+        end
+        object btn_FwdOpenCom: TButton
+          Left = 224
+          Height = 29
+          Top = 5
+          Width = 104
+          Caption = 'Forward Start'
+          OnClick = btn_FwdOpenComClick
+          TabOrder = 1
+        end
       end
     end
     object tbSettings: TTabSheet

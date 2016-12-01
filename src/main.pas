@@ -21,7 +21,9 @@ type
   { TfrmMain }
 
   TfrmMain = class(TForm)
+    btn_FwdOpenCom: TButton;
     btn_Save_Settings: TButton;
+    btn_SrcOpenCom: TButton;
     chk_SrcRxDsrSensivity: TCheckBox;
     chk_FwdRxDsrSensivity: TCheckBox;
     chk_SrcRxDtrEnable: TCheckBox;
@@ -46,6 +48,7 @@ type
     edt_FwdTxBuffSize: TEdit;
     grd_Source: TGroupBox;
     grp_Forward: TGroupBox;
+    Label1: TLabel;
     Label10: TLabel;
     Label11: TLabel;
     Label12: TLabel;
@@ -63,6 +66,7 @@ type
     LazSerSrc: TLazSerial;
     LazSerFwd: TLazSerial;
     mem_General: TMemo;
+    pnl_LogTopMenu: TPanel;
     pnl_LogsMain: TPanel;
     pgMain: TPageControl;
     spd_SrcComCheck: TSpeedButton;
@@ -71,6 +75,8 @@ type
     tbLogs: TTabSheet;
     tbSettings: TTabSheet;
     tmrStartUp: TTimer;
+    procedure btn_FwdOpenComClick(Sender: TObject);
+    procedure btn_SrcOpenComClick(Sender: TObject);
     procedure btn_Save_SettingsClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -78,6 +84,7 @@ type
     procedure spd_SrcComCheckClick(Sender: TObject);
     procedure tmrStartUpTimer(Sender: TObject);
   private
+    procedure AppException(Sender: TObject; E: Exception);
     { private declarations }
     procedure EnumComPorts(lst:TStrings);
     procedure LoadComponentValue(cmp: TComponent);
@@ -86,6 +93,10 @@ type
 
     procedure SaveConf;
     procedure LoadConf;
+    function StrToBaudRate(baud_str: string): TBaudRate;
+    function StrToDataBits(data_bits: string): TDataBits;
+    function StrToParity(parity_str: string): TParity;
+    function StrToStopBits(stop_bits: string): TStopBits;
 
   public
     { public declarations }
@@ -163,13 +174,174 @@ end;
 procedure TfrmMain.FormCreate(Sender: TObject);
 begin
   AppPath := GetCurrentDir;
-  IniFName := AppPath+PathDelim+Application.ExeName+'.ini';
+  IniFName := AppPath+PathDelim+'settings.ini';
   IniF := TIniFile.Create(IniFName);
+  Application.OnException:=@AppException;
 end;
 
 procedure TfrmMain.btn_Save_SettingsClick(Sender: TObject);
 begin
   SaveConf;
+end;
+
+procedure TfrmMain.btn_SrcOpenComClick(Sender: TObject);
+begin
+  if (cmb_SrcCommPort.Text = '') then
+    Exit;
+
+  if LazSerSrc.Active then
+  begin
+    try
+      LazSerSrc.Close;
+    finally
+      btn_SrcOpenCom.Caption := 'Source Start';
+      LogAdd(mem_General, 'COM Scr: Closed! ');
+    end;
+  end
+  else
+  begin
+    with LazSerSrc do
+    begin
+
+      Device     := cmb_SrcCommPort.Text;
+      BaudRate := StrToBaudRate(cmb_SrcCommBaud.Text);
+      DataBits := StrToDataBits(cmb_SrcCommDataBit.Text);
+
+
+      {if StrToInt(edt_TxBuffSize.Text) <> integer(Buffer.OutputSize) then
+        Buffer.OutputSize := StrToInt(edt_TxBuffSize.Text);
+
+      if StrToInt(edt_RxBuffSize.Text) <> integer(Buffer.InputSize) then
+        Buffer.InputSize := StrToInt(edt_RxBuffSize.Text);}
+
+        case cmb_SrcCommStopBit.ItemIndex  of
+          1: StopBits := sbOne;
+          2: StopBits := sbOneAndHalf;
+          3: StopBits := sbTwo;
+        end;
+
+        case cmb_SrcCommParity.ItemIndex of
+          0: Parity := pNone;
+          1: Parity := pOdd;
+          2: Parity := pEven;
+          3: Parity := pMark;
+          4: Parity := pSpace;
+        end;
+
+        if (frmMain.chk_SrcRxDtrEnable.Checked) or
+           (frmMain.chk_SrcRxRtsEnable.Checked) or
+           (frmMain.chk_SrcRxDsrSensivity.Checked) then
+          FlowControl := fcHardware
+        else
+          FlowControl := fcNone;
+
+        if frmMain.chk_SrcXonXoff.Checked then
+        begin
+          FlowControl  := fcXonXoff;
+        end
+        else
+        begin
+          FlowControl  := fcNone;
+        end;
+
+        try
+          LazSerSrc.Open;
+          btn_SrcOpenCom.Caption := 'Source Stop';
+        except
+          exit;
+        end;
+
+        if LazSerSrc.Active then
+        begin
+          LogAdd(mem_General, 'COM Scr: Opened... ');
+        end
+        else
+          LogAdd(mem_General, 'COM Scr: Did`t open... ');
+
+      end; //with LazSerSrc do
+
+  end;
+
+end;
+
+procedure TfrmMain.btn_FwdOpenComClick(Sender: TObject);
+begin
+  if (cmb_FwdCommPort.Text = '') then
+    Exit;
+
+  if LazSerFwd.Active then
+  begin
+    try
+      LazSerFwd.Close;
+    finally
+      btn_FwdOpenCom.Caption := 'Forward Start';
+      LogAdd(mem_General, 'COM Fwd: Closed! ');
+    end;
+  end
+  else
+  begin
+    with LazSerFwd do
+    begin
+
+      Device     := cmb_FwdCommPort.Text;
+      BaudRate := StrToBaudRate(cmb_FwdCommBaud.Text);
+      DataBits := StrToDataBits(cmb_FwdCommDataBit.Text);
+
+
+      {if StrToInt(edt_TxBuffSize.Text) <> integer(Buffer.OutputSize) then
+        Buffer.OutputSize := StrToInt(edt_TxBuffSize.Text);
+
+      if StrToInt(edt_RxBuffSize.Text) <> integer(Buffer.InputSize) then
+        Buffer.InputSize := StrToInt(edt_RxBuffSize.Text);}
+
+        case cmb_FwdCommStopBit.ItemIndex  of
+          1: StopBits := sbOne;
+          2: StopBits := sbOneAndHalf;
+          3: StopBits := sbTwo;
+        end;
+
+        case cmb_FWdCommParity.ItemIndex of
+          0: Parity := pNone;
+          1: Parity := pOdd;
+          2: Parity := pEven;
+          3: Parity := pMark;
+          4: Parity := pSpace;
+        end;
+
+        if (frmMain.chk_FwdRxDtrEnable.Checked) or
+           (frmMain.chk_FwdRxRtsEnable.Checked) or
+           (frmMain.chk_FwdRxDsrSensivity.Checked) then
+          FlowControl := fcHardware
+        else
+          FlowControl := fcNone;
+
+        if frmMain.chk_FwdXonXoff.Checked then
+        begin
+          FlowControl  := fcXonXoff;
+        end
+        else
+        begin
+          FlowControl  := fcNone;
+        end;
+
+        try
+          LazSerFwd.Open;
+          btn_FwdOpenCom.Caption := 'Forward Stop';
+        except
+          exit;
+        end;
+
+        if LazSerFwd.Active then
+        begin
+          LogAdd(mem_General, 'COM Fwd: Opened... ');
+        end
+        else
+          LogAdd(mem_General, 'COM Fwd: Did`t open... ');
+
+      end; //with LazSerSrc do
+
+  end;
+
 end;
 
 procedure TfrmMain.LoadComponentValue(cmp: TComponent);
@@ -312,6 +484,86 @@ begin
 
 end;
 
+procedure TfrmMain.AppException(Sender: TObject; E: Exception);
+begin
+  LogAdd(mem_General,'INF: Exception: '+Sender.ClassName+' Mes:'+E.Message);
+end;
+
+function TfrmMain.StrToBaudRate(baud_str: string): TBaudRate;
+const
+  ConstBaud: array[0..17] of integer=(110,
+    300, 600, 1200, 2400, 4800, 9600,14400, 19200, 38400,56000, 57600,
+    115200,128000,230400,256000, 460800, 921600);
+var
+   baud : integer;
+   n : integer;
+begin
+  try
+    baud := StrToInt(baud_str);
+    for n:= Low(ConstBaud) to High(ConstBaud) do
+      begin
+        if ConstBaud[n]=baud then
+          begin
+            Result := TBaudRate(n);
+            Break;
+          end;
+      end;
+  except
+    Result := br__9600;
+  end;
+end;
+
+function TfrmMain.StrToDataBits(data_bits: string): TDataBits;
+const
+  ConstBits: array[0..3] of integer=(8, 7 , 6, 5);
+var
+   bits : integer;
+   n : integer;
+begin
+  try
+    bits := StrToInt(data_bits);
+    for n:= Low(ConstBits) to High(ConstBits) do
+      begin
+        if ConstBits[n]=bits then
+          begin
+            Result := TDataBits(n);
+            Break;
+          end;
+      end;
+  except
+    Result := db8bits;
+  end;
+end;
+
+function TfrmMain.StrToParity(parity_str: string): TParity;
+const
+  ConstParity: array[0..4] of char=('N', 'O', 'E', 'M', 'S');
+var
+   n : integer;
+begin
+  try
+    for n:= Low(ConstParity) to High(ConstParity) do
+      begin
+        if ConstParity[n]=parity_str[1] then  // Even,None,Odd first char
+          begin
+            Result := TParity(n);
+            Break;
+          end;
+      end;
+  except
+    Result := pNone;
+  end;
+end;
+
+function TfrmMain.StrToStopBits(stop_bits: string): TStopBits;
+begin
+  Result := sbOne;
+  case stop_bits of
+    '1'   : Result := sbOne;
+    '1.5' : Result := sbOneAndHalf;
+    '2'   : Result := sbTwo;
+  end;
+end;
 
 end.
 
