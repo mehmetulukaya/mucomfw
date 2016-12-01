@@ -1,32 +1,32 @@
 object frmMain: TfrmMain
-  Left = 315
-  Height = 512
-  Top = 132
-  Width = 854
+  Left = 314
+  Height = 539
+  Top = 107
+  Width = 819
   Caption = 'frmMain'
-  ClientHeight = 512
-  ClientWidth = 854
+  ClientHeight = 539
+  ClientWidth = 819
   OnCreate = FormCreate
   OnShow = FormShow
   LCLVersion = '1.6.0.4'
   object pgMain: TPageControl
     Left = 0
-    Height = 512
+    Height = 539
     Top = 0
-    Width = 854
-    ActivePage = tbLogs
+    Width = 819
+    ActivePage = tbSettings
     Align = alClient
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 0
     object tbLogs: TTabSheet
       Caption = 'Logs'
-      ClientHeight = 484
-      ClientWidth = 846
+      ClientHeight = 506
+      ClientWidth = 813
       object mem_General: TMemo
         Left = 0
         Height = 74
-        Top = 410
-        Width = 846
+        Top = 432
+        Width = 813
         Align = alBottom
         Color = clWhite
         Font.Color = clBlack
@@ -40,32 +40,32 @@ object frmMain: TfrmMain
         Cursor = crVSplit
         Left = 0
         Height = 4
-        Top = 406
-        Width = 846
+        Top = 428
+        Width = 813
         Align = alBottom
         ResizeAnchor = akBottom
       end
       object pnl_LogsMain: TPanel
         Left = 0
-        Height = 406
+        Height = 428
         Top = 0
-        Width = 846
+        Width = 813
         Align = alClient
         TabOrder = 2
       end
     end
     object tbSettings: TTabSheet
       Caption = 'Settings'
-      ClientHeight = 484
-      ClientWidth = 846
+      ClientHeight = 506
+      ClientWidth = 813
       object grd_Source: TGroupBox
         Left = 9
         Height = 338
         Top = 7
         Width = 220
         Caption = 'Source COM Port:'
-        ClientHeight = 318
-        ClientWidth = 216
+        ClientHeight = 322
+        ClientWidth = 218
         TabOrder = 0
         object spd_SrcComCheck: TSpeedButton
           Left = 172
@@ -77,12 +77,12 @@ object frmMain: TfrmMain
         end
         object cmb_SrcCommPort: TComboBox
           Left = 89
-          Height = 22
+          Height = 25
           Top = 6
           Width = 79
           Font.Height = -11
           Font.Name = 'Sans'
-          ItemHeight = 14
+          ItemHeight = 0
           ItemIndex = 0
           Items.Strings = (
             '-'
@@ -96,7 +96,7 @@ object frmMain: TfrmMain
           Left = 16
           Height = 15
           Top = 9
-          Width = 68
+          Width = 75
           Caption = 'Comm. Port:'
           ParentColor = False
         end
@@ -104,16 +104,16 @@ object frmMain: TfrmMain
           Left = 16
           Height = 15
           Top = 35
-          Width = 56
+          Width = 66
           Caption = 'Baud Rate:'
           ParentColor = False
         end
         object cmb_SrcCommBaud: TComboBox
           Left = 89
-          Height = 23
+          Height = 25
           Top = 32
           Width = 79
-          ItemHeight = 15
+          ItemHeight = 0
           ItemIndex = 2
           Items.Strings = (
             '110'
@@ -135,10 +135,10 @@ object frmMain: TfrmMain
         end
         object cmb_SrcCommDataBit: TComboBox
           Left = 89
-          Height = 23
+          Height = 25
           Top = 59
           Width = 79
-          ItemHeight = 15
+          ItemHeight = 0
           ItemIndex = 2
           Items.Strings = (
             '5'
@@ -154,7 +154,7 @@ object frmMain: TfrmMain
           Left = 16
           Height = 15
           Top = 65
-          Width = 49
+          Width = 58
           Caption = 'Data Bits:'
           ParentColor = False
         end
@@ -162,16 +162,16 @@ object frmMain: TfrmMain
           Left = 16
           Height = 15
           Top = 92
-          Width = 33
+          Width = 36
           Caption = 'Parity:'
           ParentColor = False
         end
         object cmb_SrcCommParity: TComboBox
           Left = 89
-          Height = 23
+          Height = 25
           Top = 86
           Width = 79
-          ItemHeight = 15
+          ItemHeight = 0
           ItemIndex = 2
           Items.Strings = (
             'None'
@@ -186,10 +186,10 @@ object frmMain: TfrmMain
         end
         object cmb_SrcCommStopBit: TComboBox
           Left = 89
-          Height = 23
+          Height = 25
           Top = 113
           Width = 79
-          ItemHeight = 15
+          ItemHeight = 0
           ItemIndex = 0
           Items.Strings = (
             '1'
@@ -204,15 +204,15 @@ object frmMain: TfrmMain
           Left = 16
           Height = 15
           Top = 119
-          Width = 49
+          Width = 58
           Caption = 'Stop Bits:'
           ParentColor = False
         end
         object chk_SrcRxDsrSensivity: TCheckBox
           Left = 16
-          Height = 19
+          Height = 22
           Top = 145
-          Width = 95
+          Width = 113
           Caption = 'RxDsrSensivity'
           Color = clBtnFace
           ParentColor = False
@@ -220,9 +220,9 @@ object frmMain: TfrmMain
         end
         object chk_SrcRxRtsEnable: TCheckBox
           Left = 16
-          Height = 19
+          Height = 22
           Top = 168
-          Width = 83
+          Width = 99
           Caption = 'RxRtsEnable'
           Color = clBtnFace
           ParentColor = False
@@ -230,9 +230,9 @@ object frmMain: TfrmMain
         end
         object chk_SrcRxDtrEnable: TCheckBox
           Left = 16
-          Height = 19
+          Height = 22
           Top = 191
-          Width = 83
+          Width = 99
           Caption = 'RxDtrEnable'
           Color = clBtnFace
           ParentColor = False
@@ -240,9 +240,9 @@ object frmMain: TfrmMain
         end
         object chk_SrcXonXoff: TCheckBox
           Left = 16
-          Height = 19
+          Height = 22
           Top = 214
-          Width = 104
+          Width = 119
           Caption = 'Xon Xoff Enable'
           Color = clBtnFace
           ParentColor = False
@@ -252,7 +252,7 @@ object frmMain: TfrmMain
           Left = 16
           Height = 15
           Top = 242
-          Width = 60
+          Width = 70
           Caption = 'Tx Buff Size'
           ParentColor = False
           Visible = False
@@ -261,14 +261,14 @@ object frmMain: TfrmMain
           Left = 16
           Height = 15
           Top = 267
-          Width = 60
+          Width = 71
           Caption = 'Rx Buff Size'
           ParentColor = False
           Visible = False
         end
         object edt_SrcTxBuffSize: TEdit
           Left = 89
-          Height = 23
+          Height = 25
           Top = 238
           Width = 72
           ParentBidiMode = False
@@ -278,7 +278,7 @@ object frmMain: TfrmMain
         end
         object edt_SrcRxBuffSize: TEdit
           Left = 89
-          Height = 23
+          Height = 25
           Top = 263
           Width = 72
           TabOrder = 10
@@ -292,8 +292,8 @@ object frmMain: TfrmMain
         Top = 7
         Width = 220
         Caption = 'Source COM Port:'
-        ClientHeight = 318
-        ClientWidth = 216
+        ClientHeight = 322
+        ClientWidth = 218
         TabOrder = 1
         object spd_FwdComCheck: TSpeedButton
           Left = 172
@@ -305,12 +305,12 @@ object frmMain: TfrmMain
         end
         object cmb_FwdCommPort: TComboBox
           Left = 89
-          Height = 22
+          Height = 25
           Top = 6
           Width = 79
           Font.Height = -11
           Font.Name = 'Sans'
-          ItemHeight = 14
+          ItemHeight = 0
           ItemIndex = 0
           Items.Strings = (
             '-'
@@ -324,7 +324,7 @@ object frmMain: TfrmMain
           Left = 16
           Height = 15
           Top = 9
-          Width = 68
+          Width = 75
           Caption = 'Comm. Port:'
           ParentColor = False
         end
@@ -332,16 +332,16 @@ object frmMain: TfrmMain
           Left = 16
           Height = 15
           Top = 35
-          Width = 56
+          Width = 66
           Caption = 'Baud Rate:'
           ParentColor = False
         end
         object cmb_FwdCommBaud: TComboBox
           Left = 89
-          Height = 23
+          Height = 25
           Top = 32
           Width = 79
-          ItemHeight = 15
+          ItemHeight = 0
           ItemIndex = 2
           Items.Strings = (
             '110'
@@ -363,10 +363,10 @@ object frmMain: TfrmMain
         end
         object cmb_FwdCommDataBit: TComboBox
           Left = 89
-          Height = 23
+          Height = 25
           Top = 59
           Width = 79
-          ItemHeight = 15
+          ItemHeight = 0
           ItemIndex = 2
           Items.Strings = (
             '5'
@@ -382,7 +382,7 @@ object frmMain: TfrmMain
           Left = 16
           Height = 15
           Top = 65
-          Width = 49
+          Width = 58
           Caption = 'Data Bits:'
           ParentColor = False
         end
@@ -390,16 +390,16 @@ object frmMain: TfrmMain
           Left = 16
           Height = 15
           Top = 92
-          Width = 33
+          Width = 36
           Caption = 'Parity:'
           ParentColor = False
         end
         object cmb_FwdCommParity: TComboBox
           Left = 89
-          Height = 23
+          Height = 25
           Top = 86
           Width = 79
-          ItemHeight = 15
+          ItemHeight = 0
           ItemIndex = 2
           Items.Strings = (
             'None'
@@ -414,10 +414,10 @@ object frmMain: TfrmMain
         end
         object cmb_FwdCommStopBit: TComboBox
           Left = 89
-          Height = 23
+          Height = 25
           Top = 113
           Width = 79
-          ItemHeight = 15
+          ItemHeight = 0
           ItemIndex = 0
           Items.Strings = (
             '1'
@@ -432,15 +432,15 @@ object frmMain: TfrmMain
           Left = 16
           Height = 15
           Top = 119
-          Width = 49
+          Width = 58
           Caption = 'Stop Bits:'
           ParentColor = False
         end
         object chk_FwdRxDsrSensivity: TCheckBox
           Left = 16
-          Height = 19
+          Height = 22
           Top = 145
-          Width = 95
+          Width = 113
           Caption = 'RxDsrSensivity'
           Color = clBtnFace
           ParentColor = False
@@ -448,9 +448,9 @@ object frmMain: TfrmMain
         end
         object chk_FwdRxRtsEnable: TCheckBox
           Left = 16
-          Height = 19
+          Height = 22
           Top = 168
-          Width = 83
+          Width = 99
           Caption = 'RxRtsEnable'
           Color = clBtnFace
           ParentColor = False
@@ -458,9 +458,9 @@ object frmMain: TfrmMain
         end
         object chk_FwdRxDtrEnable: TCheckBox
           Left = 16
-          Height = 19
+          Height = 22
           Top = 191
-          Width = 83
+          Width = 99
           Caption = 'RxDtrEnable'
           Color = clBtnFace
           ParentColor = False
@@ -468,9 +468,9 @@ object frmMain: TfrmMain
         end
         object chk_FwdXonXoff: TCheckBox
           Left = 16
-          Height = 19
+          Height = 22
           Top = 214
-          Width = 104
+          Width = 119
           Caption = 'Xon Xoff Enable'
           Color = clBtnFace
           ParentColor = False
@@ -480,7 +480,7 @@ object frmMain: TfrmMain
           Left = 16
           Height = 15
           Top = 242
-          Width = 60
+          Width = 70
           Caption = 'Tx Buff Size'
           ParentColor = False
           Visible = False
@@ -489,14 +489,14 @@ object frmMain: TfrmMain
           Left = 16
           Height = 15
           Top = 267
-          Width = 60
+          Width = 71
           Caption = 'Rx Buff Size'
           ParentColor = False
           Visible = False
         end
         object edt_FwdTxBuffSize: TEdit
           Left = 89
-          Height = 23
+          Height = 25
           Top = 238
           Width = 72
           ParentBidiMode = False
@@ -506,7 +506,7 @@ object frmMain: TfrmMain
         end
         object edt_FwdRxBuffSize: TEdit
           Left = 89
-          Height = 23
+          Height = 25
           Top = 263
           Width = 72
           TabOrder = 10
@@ -520,6 +520,7 @@ object frmMain: TfrmMain
         Top = 359
         Width = 101
         Caption = 'Save Settings'
+        OnClick = btn_Save_SettingsClick
         TabOrder = 2
       end
     end

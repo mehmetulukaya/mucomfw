@@ -9,6 +9,10 @@ uses
   ExtCtrls, StdCtrls, Buttons, LazSerial
 
   , synaser
+  , IniFiles
+  , MuLibs    // general library
+  , EditBtn
+
 
   ;
 
@@ -66,6 +70,7 @@ type
     Splitter4: TSplitter;
     tbLogs: TTabSheet;
     tbSettings: TTabSheet;
+    procedure btn_Save_SettingsClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure spd_FwdComCheckClick(Sender: TObject);
@@ -73,7 +78,9 @@ type
   private
     { private declarations }
     procedure EnumComPorts(lst:TStrings);
+    procedure LoadComponentValue(cmp: TComponent; iniF: TInifile);
     procedure LogAdd(LogWindow: TMemo; s: string);
+    procedure SaveComponentValue(cmp: TComponent; iniF: TInifile);
   public
     { public declarations }
   end;
@@ -81,7 +88,10 @@ type
 var
   frmMain: TfrmMain;
 
-  AppPath : String;
+  AppPath,
+  IniFName: String;
+  IniF : TIniFile;
+
 
 implementation
 
@@ -131,7 +141,91 @@ end;
 procedure TfrmMain.FormCreate(Sender: TObject);
 begin
   AppPath := GetCurrentDir;
+  IniFName := AppPath+PathDelim+Application.ExeName+'.ini';
+  IniF := TIniFile.Create(IniFName);
 end;
+
+procedure TfrmMain.btn_Save_SettingsClick(Sender: TObject);
+begin
+
+end;
+
+procedure TfrmMain.LoadComponentValue(cmp: TComponent; iniF: TInifile);
+const
+   section = 'COMP';
+begin
+  // Load component values from ini file
+  if (cmp is TEdit) then
+    with (cmp as TEdit) do
+      Text := iniF.ReadString(section,cmp.Name, Text );
+
+  if (cmp is TCheckBox) then
+    with (cmp as TCheckBox) do
+      Checked := iniF.ReadBool(section,cmp.Name, Checked );
+
+  if (cmp is TRadioButton) then
+    with (cmp as TRadioButton) do
+      Checked := iniF.ReadBool(section,cmp.Name, Checked );
+
+  if (cmp is TListBox) then
+    with (cmp as TListBox) do
+      ItemIndex := iniF.ReadInteger(section,cmp.Name, ItemIndex );
+
+  if (cmp is TComboBox) then
+    with (cmp as TComboBox) do
+      ItemIndex := iniF.ReadInteger(section,cmp.Name, ItemIndex );
+
+  if (cmp is TFileNameEdit) then
+    with (cmp as TFileNameEdit) do
+      FileName := iniF.ReadString(section,cmp.Name, FileName );
+
+  if (cmp is TFontDialog) then
+    with (cmp as TFontDialog) do
+    begin
+      Font.Color:=iniF.ReadInteger(section,cmp.Name+'.Font.Color', Font.Color);
+      iniF.WriteInteger(section,cmp.Name+'.Font.Size', Font.Size );
+    end;
+
+end;
+
+procedure TfrmMain.SaveComponentValue(cmp: TComponent; iniF: TInifile);
+const
+   section = 'COMP';
+begin
+  // Save component values into ini file
+  if (cmp is TEdit) then
+    with (cmp as TEdit) do
+      iniF.WriteString(section,cmp.Name, Text );
+
+  if (cmp is TCheckBox) then
+    with (cmp as TCheckBox) do
+      iniF.WriteBool(section,cmp.Name, Checked );
+
+  if (cmp is TRadioButton) then
+    with (cmp as TRadioButton) do
+      iniF.WriteBool(section,cmp.Name, Checked );
+
+  if (cmp is TListBox) then
+    with (cmp as TListBox) do
+      iniF.WriteInteger(section,cmp.Name, ItemIndex );
+
+  if (cmp is TComboBox) then
+    with (cmp as TComboBox) do
+      iniF.WriteInteger(section,cmp.Name, ItemIndex );
+
+  if (cmp is TFileNameEdit) then
+    with (cmp as TFileNameEdit) do
+      iniF.WriteString(section,cmp.Name, FileName );
+
+  if (cmp is TFontDialog) then
+    with (cmp as TFontDialog) do
+    begin
+      iniF.WriteInteger(section,cmp.Name+'.Font.Color', Font.Color );
+      iniF.WriteInteger(section,cmp.Name+'.Font.Size', Font.Size );
+    end;
+
+end;
+
 
 end.
 
