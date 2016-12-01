@@ -1,0 +1,551 @@
+object frmMain: TfrmMain
+  Left = 315
+  Height = 512
+  Top = 132
+  Width = 854
+  Caption = 'frmMain'
+  ClientHeight = 512
+  ClientWidth = 854
+  OnCreate = FormCreate
+  OnShow = FormShow
+  LCLVersion = '1.6.0.4'
+  object pgMain: TPageControl
+    Left = 0
+    Height = 512
+    Top = 0
+    Width = 854
+    ActivePage = tbLogs
+    Align = alClient
+    TabIndex = 0
+    TabOrder = 0
+    object tbLogs: TTabSheet
+      Caption = 'Logs'
+      ClientHeight = 484
+      ClientWidth = 846
+      object mem_General: TMemo
+        Left = 0
+        Height = 74
+        Top = 410
+        Width = 846
+        Align = alBottom
+        Color = clWhite
+        Font.Color = clBlack
+        Font.Height = -11
+        Font.Name = 'MS Sans Serif'
+        ParentFont = False
+        ScrollBars = ssVertical
+        TabOrder = 0
+      end
+      object Splitter4: TSplitter
+        Cursor = crVSplit
+        Left = 0
+        Height = 4
+        Top = 406
+        Width = 846
+        Align = alBottom
+        ResizeAnchor = akBottom
+      end
+      object pnl_LogsMain: TPanel
+        Left = 0
+        Height = 406
+        Top = 0
+        Width = 846
+        Align = alClient
+        TabOrder = 2
+      end
+    end
+    object tbSettings: TTabSheet
+      Caption = 'Settings'
+      ClientHeight = 484
+      ClientWidth = 846
+      object grd_Source: TGroupBox
+        Left = 9
+        Height = 338
+        Top = 7
+        Width = 220
+        Caption = 'Source COM Port:'
+        ClientHeight = 318
+        ClientWidth = 216
+        TabOrder = 0
+        object spd_SrcComCheck: TSpeedButton
+          Left = 172
+          Height = 22
+          Top = 6
+          Width = 22
+          Caption = '~'
+          OnClick = spd_SrcComCheckClick
+        end
+        object cmb_SrcCommPort: TComboBox
+          Left = 89
+          Height = 22
+          Top = 6
+          Width = 79
+          Font.Height = -11
+          Font.Name = 'Sans'
+          ItemHeight = 14
+          ItemIndex = 0
+          Items.Strings = (
+            '-'
+          )
+          ParentFont = False
+          Style = csDropDownList
+          TabOrder = 0
+          Text = '-'
+        end
+        object Label2: TLabel
+          Left = 16
+          Height = 15
+          Top = 9
+          Width = 68
+          Caption = 'Comm. Port:'
+          ParentColor = False
+        end
+        object Label3: TLabel
+          Left = 16
+          Height = 15
+          Top = 35
+          Width = 56
+          Caption = 'Baud Rate:'
+          ParentColor = False
+        end
+        object cmb_SrcCommBaud: TComboBox
+          Left = 89
+          Height = 23
+          Top = 32
+          Width = 79
+          ItemHeight = 15
+          ItemIndex = 2
+          Items.Strings = (
+            '110'
+            '200'
+            '300'
+            '600'
+            '1200'
+            '2400'
+            '4800'
+            '9600'
+            '19200'
+            '38400'
+            '57600'
+            '115200'
+          )
+          Style = csDropDownList
+          TabOrder = 1
+          Text = '300'
+        end
+        object cmb_SrcCommDataBit: TComboBox
+          Left = 89
+          Height = 23
+          Top = 59
+          Width = 79
+          ItemHeight = 15
+          ItemIndex = 2
+          Items.Strings = (
+            '5'
+            '6'
+            '7'
+            '8'
+          )
+          Style = csDropDownList
+          TabOrder = 2
+          Text = '7'
+        end
+        object Label4: TLabel
+          Left = 16
+          Height = 15
+          Top = 65
+          Width = 49
+          Caption = 'Data Bits:'
+          ParentColor = False
+        end
+        object Label5: TLabel
+          Left = 16
+          Height = 15
+          Top = 92
+          Width = 33
+          Caption = 'Parity:'
+          ParentColor = False
+        end
+        object cmb_SrcCommParity: TComboBox
+          Left = 89
+          Height = 23
+          Top = 86
+          Width = 79
+          ItemHeight = 15
+          ItemIndex = 2
+          Items.Strings = (
+            'None'
+            'Odd'
+            'Even'
+            'Mark'
+            'Space'
+          )
+          Style = csDropDownList
+          TabOrder = 3
+          Text = 'Even'
+        end
+        object cmb_SrcCommStopBit: TComboBox
+          Left = 89
+          Height = 23
+          Top = 113
+          Width = 79
+          ItemHeight = 15
+          ItemIndex = 0
+          Items.Strings = (
+            '1'
+            '1.5'
+            '2'
+          )
+          Style = csDropDownList
+          TabOrder = 4
+          Text = '1'
+        end
+        object Label6: TLabel
+          Left = 16
+          Height = 15
+          Top = 119
+          Width = 49
+          Caption = 'Stop Bits:'
+          ParentColor = False
+        end
+        object chk_SrcRxDsrSensivity: TCheckBox
+          Left = 16
+          Height = 19
+          Top = 145
+          Width = 95
+          Caption = 'RxDsrSensivity'
+          Color = clBtnFace
+          ParentColor = False
+          TabOrder = 5
+        end
+        object chk_SrcRxRtsEnable: TCheckBox
+          Left = 16
+          Height = 19
+          Top = 168
+          Width = 83
+          Caption = 'RxRtsEnable'
+          Color = clBtnFace
+          ParentColor = False
+          TabOrder = 6
+        end
+        object chk_SrcRxDtrEnable: TCheckBox
+          Left = 16
+          Height = 19
+          Top = 191
+          Width = 83
+          Caption = 'RxDtrEnable'
+          Color = clBtnFace
+          ParentColor = False
+          TabOrder = 7
+        end
+        object chk_SrcXonXoff: TCheckBox
+          Left = 16
+          Height = 19
+          Top = 214
+          Width = 104
+          Caption = 'Xon Xoff Enable'
+          Color = clBtnFace
+          ParentColor = False
+          TabOrder = 8
+        end
+        object Label7: TLabel
+          Left = 16
+          Height = 15
+          Top = 242
+          Width = 60
+          Caption = 'Tx Buff Size'
+          ParentColor = False
+          Visible = False
+        end
+        object Label8: TLabel
+          Left = 16
+          Height = 15
+          Top = 267
+          Width = 60
+          Caption = 'Rx Buff Size'
+          ParentColor = False
+          Visible = False
+        end
+        object edt_SrcTxBuffSize: TEdit
+          Left = 89
+          Height = 23
+          Top = 238
+          Width = 72
+          ParentBidiMode = False
+          TabOrder = 9
+          Text = '8192'
+          Visible = False
+        end
+        object edt_SrcRxBuffSize: TEdit
+          Left = 89
+          Height = 23
+          Top = 263
+          Width = 72
+          TabOrder = 10
+          Text = '8192'
+          Visible = False
+        end
+      end
+      object grp_Forward: TGroupBox
+        Left = 245
+        Height = 338
+        Top = 7
+        Width = 220
+        Caption = 'Source COM Port:'
+        ClientHeight = 318
+        ClientWidth = 216
+        TabOrder = 1
+        object spd_FwdComCheck: TSpeedButton
+          Left = 172
+          Height = 22
+          Top = 6
+          Width = 22
+          Caption = '~'
+          OnClick = spd_FwdComCheckClick
+        end
+        object cmb_FwdCommPort: TComboBox
+          Left = 89
+          Height = 22
+          Top = 6
+          Width = 79
+          Font.Height = -11
+          Font.Name = 'Sans'
+          ItemHeight = 14
+          ItemIndex = 0
+          Items.Strings = (
+            '-'
+          )
+          ParentFont = False
+          Style = csDropDownList
+          TabOrder = 0
+          Text = '-'
+        end
+        object Label9: TLabel
+          Left = 16
+          Height = 15
+          Top = 9
+          Width = 68
+          Caption = 'Comm. Port:'
+          ParentColor = False
+        end
+        object Label10: TLabel
+          Left = 16
+          Height = 15
+          Top = 35
+          Width = 56
+          Caption = 'Baud Rate:'
+          ParentColor = False
+        end
+        object cmb_FwdCommBaud: TComboBox
+          Left = 89
+          Height = 23
+          Top = 32
+          Width = 79
+          ItemHeight = 15
+          ItemIndex = 2
+          Items.Strings = (
+            '110'
+            '200'
+            '300'
+            '600'
+            '1200'
+            '2400'
+            '4800'
+            '9600'
+            '19200'
+            '38400'
+            '57600'
+            '115200'
+          )
+          Style = csDropDownList
+          TabOrder = 1
+          Text = '300'
+        end
+        object cmb_FwdCommDataBit: TComboBox
+          Left = 89
+          Height = 23
+          Top = 59
+          Width = 79
+          ItemHeight = 15
+          ItemIndex = 2
+          Items.Strings = (
+            '5'
+            '6'
+            '7'
+            '8'
+          )
+          Style = csDropDownList
+          TabOrder = 2
+          Text = '7'
+        end
+        object Label11: TLabel
+          Left = 16
+          Height = 15
+          Top = 65
+          Width = 49
+          Caption = 'Data Bits:'
+          ParentColor = False
+        end
+        object Label12: TLabel
+          Left = 16
+          Height = 15
+          Top = 92
+          Width = 33
+          Caption = 'Parity:'
+          ParentColor = False
+        end
+        object cmb_FwdCommParity: TComboBox
+          Left = 89
+          Height = 23
+          Top = 86
+          Width = 79
+          ItemHeight = 15
+          ItemIndex = 2
+          Items.Strings = (
+            'None'
+            'Odd'
+            'Even'
+            'Mark'
+            'Space'
+          )
+          Style = csDropDownList
+          TabOrder = 3
+          Text = 'Even'
+        end
+        object cmb_FwdCommStopBit: TComboBox
+          Left = 89
+          Height = 23
+          Top = 113
+          Width = 79
+          ItemHeight = 15
+          ItemIndex = 0
+          Items.Strings = (
+            '1'
+            '1.5'
+            '2'
+          )
+          Style = csDropDownList
+          TabOrder = 4
+          Text = '1'
+        end
+        object Label13: TLabel
+          Left = 16
+          Height = 15
+          Top = 119
+          Width = 49
+          Caption = 'Stop Bits:'
+          ParentColor = False
+        end
+        object chk_FwdRxDsrSensivity: TCheckBox
+          Left = 16
+          Height = 19
+          Top = 145
+          Width = 95
+          Caption = 'RxDsrSensivity'
+          Color = clBtnFace
+          ParentColor = False
+          TabOrder = 5
+        end
+        object chk_FwdRxRtsEnable: TCheckBox
+          Left = 16
+          Height = 19
+          Top = 168
+          Width = 83
+          Caption = 'RxRtsEnable'
+          Color = clBtnFace
+          ParentColor = False
+          TabOrder = 6
+        end
+        object chk_FwdRxDtrEnable: TCheckBox
+          Left = 16
+          Height = 19
+          Top = 191
+          Width = 83
+          Caption = 'RxDtrEnable'
+          Color = clBtnFace
+          ParentColor = False
+          TabOrder = 7
+        end
+        object chk_FwdXonXoff: TCheckBox
+          Left = 16
+          Height = 19
+          Top = 214
+          Width = 104
+          Caption = 'Xon Xoff Enable'
+          Color = clBtnFace
+          ParentColor = False
+          TabOrder = 8
+        end
+        object Label14: TLabel
+          Left = 16
+          Height = 15
+          Top = 242
+          Width = 60
+          Caption = 'Tx Buff Size'
+          ParentColor = False
+          Visible = False
+        end
+        object Label15: TLabel
+          Left = 16
+          Height = 15
+          Top = 267
+          Width = 60
+          Caption = 'Rx Buff Size'
+          ParentColor = False
+          Visible = False
+        end
+        object edt_FwdTxBuffSize: TEdit
+          Left = 89
+          Height = 23
+          Top = 238
+          Width = 72
+          ParentBidiMode = False
+          TabOrder = 9
+          Text = '8192'
+          Visible = False
+        end
+        object edt_FwdRxBuffSize: TEdit
+          Left = 89
+          Height = 23
+          Top = 263
+          Width = 72
+          TabOrder = 10
+          Text = '8192'
+          Visible = False
+        end
+      end
+      object btn_Save_Settings: TButton
+        Left = 9
+        Height = 39
+        Top = 359
+        Width = 101
+        Caption = 'Save Settings'
+        TabOrder = 2
+      end
+    end
+  end
+  object LazSerSrc: TLazSerial
+    Active = False
+    BaudRate = br___110
+    DataBits = db8bits
+    Parity = pNone
+    FlowControl = fcNone
+    StopBits = sbOne
+    Device = 'COM1'
+    RcvLineCRLF = False
+    left = 513
+    top = 25
+  end
+  object LazSerFwd: TLazSerial
+    Active = False
+    BaudRate = br___110
+    DataBits = db8bits
+    Parity = pNone
+    FlowControl = fcNone
+    StopBits = sbOne
+    Device = 'COM1'
+    RcvLineCRLF = False
+    left = 574
+    top = 25
+  end
+end
