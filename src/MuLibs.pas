@@ -4,10 +4,11 @@ MuLibs is a library includes some useful function for Lazarus/fpc and Delphi.
 
 It can be portable Windows or Linux. ( I tried on debian based Mint 32 Bit)
 
-All rights reserved on me please don't use in commercial softwares.
-Let's do it your self !
+You can change the code but you should publish you changes to public.
 
-11.11.2015 Mehmet Ulukaya ( mehmetulukaya@gmail.com )
+In short it has got LGPL license agrement.
+
+Mehmet Ulukaya ( mehmetulukaya@gmail.com )
 
 }
 unit MuLibs;
