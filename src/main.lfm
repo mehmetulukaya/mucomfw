@@ -534,12 +534,6 @@ object frmMain: TfrmMain
           MouseActions = <>
           MouseTextActions = <>
           MouseSelActions = <>
-          Lines.Strings = (
-            'SND: hh aa  983475 45 43'
-            'RCV: sjkdfhalsk  .ç.ç i,i, üğ üğü '
-            ''
-            '$#£>][{¾½$#£'
-          )
           VisibleSpecialChars = [vscSpace, vscTabAtLast]
           SelectedColor.BackPriority = 50
           SelectedColor.ForePriority = 50

@@ -191,6 +191,8 @@ procedure TfrmMain.tmrStartUpTimer(Sender: TObject);
 begin
   tmrStartUp.Enabled:=False;
   LogAdd(mem_General,'Started');
+  spd_SrcComCheckClick(nil);
+  spd_FwdComCheckClick(nil);
   LoadConf;
 end;
 
