@@ -9,7 +9,6 @@
       <Title Value="MuComFw: MU Com Port Forwarder"/>
       <ResourceType Value="res"/>
       <UseXPManifest Value="True"/>
-      <Icon Value="0"/>
     </General>
     <i18n>
       <EnableI18N LFM="False"/>
@@ -17,7 +16,7 @@
     <VersionInfo>
       <UseVersionInfo Value="True"/>
       <AutoIncrementBuild Value="True"/>
-      <BuildNr Value="14"/>
+      <BuildNr Value="16"/>
       <StringTable ProductVersion=""/>
     </VersionInfo>
     <BuildModes Count="1">

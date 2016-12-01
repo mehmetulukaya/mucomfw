@@ -66,6 +66,8 @@ type
     Label9: TLabel;
     LazSerSrc: TLazSerial;
     LazSerFwd: TLazSerial;
+    mem_HexLog: TMemo;
+    mem_TextLog: TMemo;
     mem_General: TMemo;
     pnl_LogsMain: TPanel;
     pnl_LogTopMenu: TPanel;
@@ -74,9 +76,6 @@ type
     spd_FwdComCheck: TSpeedButton;
     spl_Logs: TSplitter;
     spl_Bottom: TSplitter;
-    SynAnySyn1: TSynAnySyn;
-    synedt_Hex: TSynEdit;
-    synedt_Text: TSynEdit;
     tbLogs: TTabSheet;
     tbSettings: TTabSheet;
     tmrStartUp: TTimer;
@@ -90,7 +89,6 @@ type
     procedure LazSerSrcRxData(Sender: TObject);
     procedure spd_FwdComCheckClick(Sender: TObject);
     procedure spd_SrcComCheckClick(Sender: TObject);
-    procedure synedt_HexChange(Sender: TObject);
     procedure tmrStartUpTimer(Sender: TObject);
   private
     procedure AppException(Sender: TObject; E: Exception);
@@ -143,8 +141,8 @@ begin
     if LazSerSrc.Active then
     begin
       LazSerSrc.WriteData(s);
-      LogAdd(TMemo(synedt_Hex),'RCV: '+StrToHex(s));
-      LogAdd(TMemo(synedt_Text),'RCV: '+s);
+      LogAdd(mem_HexLog,'RCV: '+StrToHex(s));
+      LogAdd(mem_TextLog,'RCV: '+s);
     end;
 end;
 
@@ -157,8 +155,8 @@ begin
     if LazSerFwd.Active then
     begin
       LazSerFwd.WriteData(s);
-      LogAdd(TMemo(synedt_Hex),'SND: '+StrToHex(s));
-      LogAdd(TMemo(synedt_Text),'SND: '+s);
+      LogAdd(mem_HexLog,'SND: '+StrToHex(s));
+      LogAdd(mem_TextLog,'SND: '+s);
     end;
 end;
 
@@ -180,11 +178,6 @@ begin
     LogAdd(mem_General,'Exception: Com port listing error!');
   end;
   cmb_SrcCommPort.DroppedDown:=True;
-end;
-
-procedure TfrmMain.synedt_HexChange(Sender: TObject);
-begin
-
 end;
 
 procedure TfrmMain.tmrStartUpTimer(Sender: TObject);
@@ -225,7 +218,7 @@ end;
 
 procedure TfrmMain.FormResize(Sender: TObject);
 begin
-  synedt_Hex.Width:= pnl_LogsMain.ClientWidth div 2;
+  mem_HexLog.Width:= pnl_LogsMain.ClientWidth div 2;
 end;
 
 procedure TfrmMain.btn_Save_SettingsClick(Sender: TObject);
