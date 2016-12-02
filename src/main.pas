@@ -12,10 +12,16 @@ uses
   , synaser
   , IniFiles
   , MuLibs    // general library
-  , EditBtn, Grids
-
+  , EditBtn
+  , Grids
 
   ;
+
+type
+  TGrdCoord=record
+    Col,
+    Row : Integer;
+  end;
 
 type
 
@@ -25,6 +31,8 @@ type
     btn_FwdOpenCom: TButton;
     btn_Save_Settings: TButton;
     btn_SrcOpenCom: TButton;
+    btn_ComParamChange: TButton;
+    chk_AutoParams: TCheckBox;
     chk_SrcRxDsrSensivity: TCheckBox;
     chk_FwdRxDsrSensivity: TCheckBox;
     chk_InstRxDsrSensivity: TCheckBox;
@@ -98,6 +106,9 @@ type
     procedure FormCreate(Sender: TObject);
     procedure FormResize(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure grd_InstBaudPrepareCanvas(sender: TObject; aCol, aRow: Integer;
+      aState: TGridDrawState);
+    procedure Label1Click(Sender: TObject);
     procedure LazSerFwdRxData(Sender: TObject);
     procedure LazSerSrcRxData(Sender: TObject);
     procedure spd_FwdComCheckClick(Sender: TObject);
@@ -120,6 +131,9 @@ type
 
   public
     { public declarations }
+    function GrdFindValue(val:String;grd:TStringGrid):TGrdCoord;
+    function GrdCellValue(grd:TStringGrid):String;
+
   end;
 
 const
@@ -143,6 +157,25 @@ procedure TfrmMain.FormShow(Sender: TObject);
 begin
   Caption:=Application.Title+' '+ProgramVersion;
   tmrStartUp.Enabled:=True;
+end;
+
+procedure TfrmMain.grd_InstBaudPrepareCanvas(sender: TObject; aCol,
+  aRow: Integer; aState: TGridDrawState);
+begin
+  with TStringGrid(sender) do
+  begin
+    if (aCol=Col) and (aRow=Row) then
+      Canvas.Brush.Color:=clLime;
+  end;
+end;
+
+procedure TfrmMain.Label1Click(Sender: TObject);
+var
+  coord : TGrdCoord;
+begin
+  coord:=GrdFindValue('9600',grd_InstBaud);
+  grd_InstBaud.Col:=coord.Col;
+  grd_InstBaud.Row:=coord.Row;
 end;
 
 procedure TfrmMain.LazSerFwdRxData(Sender: TObject);
@@ -258,7 +291,7 @@ begin
     with LazSerSrc do
     begin
 
-      Device     := cmb_SrcCommPort.Text;
+      Device   := cmb_SrcCommPort.Text;
       BaudRate := StrToBaudRate(cmb_SrcCommBaud.Text);
       DataBits := StrToDataBits(cmb_SrcCommDataBit.Text);
 
@@ -618,6 +651,38 @@ begin
     '1.5' : Result := sbOneAndHalf;
     '2'   : Result := sbTwo;
   end;
+end;
+
+function TfrmMain.GrdFindValue(val: String; grd: TStringGrid): TGrdCoord;
+var
+   c,r : Integer;
+begin
+  Result.Col:=-1;
+  Result.Row:=-1;
+
+  if not Assigned(grd) then
+    Exit;
+
+  for c:=0 to Pred(grd.ColCount) do
+    for r:=0 to Pred(grd.RowCount) do
+      begin
+        if Pos(val,grd.Cells[c,r])>0 then
+          begin
+            Result.Col:=c;
+            Result.Row:=r;
+            Break;
+          end;
+      end;
+
+end;
+
+function TfrmMain.GrdCellValue(grd: TStringGrid): String;
+begin
+  Result:='';
+  if not Assigned(grd) then
+    Exit;
+  with grd do
+    Result:=grd.Cells[Col,Row];
 end;
 
 end.
