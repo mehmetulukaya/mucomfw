@@ -176,6 +176,12 @@ begin
   coord:=GrdFindValue('9600',grd_InstBaud);
   grd_InstBaud.Col:=coord.Col;
   grd_InstBaud.Row:=coord.Row;
+
+  LogAdd(mem_General,GrdCellValue(grd_InstBaud));
+  LogAdd(mem_General,GrdCellValue(grd_InstBaud1));
+  LogAdd(mem_General,GrdCellValue(grd_InstBaud2));
+  LogAdd(mem_General,GrdCellValue(grd_InstBaud3));
+
 end;
 
 procedure TfrmMain.LazSerFwdRxData(Sender: TObject);
