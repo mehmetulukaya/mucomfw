@@ -1,11 +1,11 @@
 object frmMain: TfrmMain
-  Left = 301
+  Left = 277
   Height = 539
-  Top = 55
-  Width = 819
+  Top = 123
+  Width = 959
   Caption = 'Main'
   ClientHeight = 539
-  ClientWidth = 819
+  ClientWidth = 959
   OnCreate = FormCreate
   OnResize = FormResize
   OnShow = FormShow
@@ -15,7 +15,7 @@ object frmMain: TfrmMain
     Left = 0
     Height = 539
     Top = 0
-    Width = 819
+    Width = 959
     ActivePage = tbLogs
     Align = alClient
     TabIndex = 0
@@ -23,12 +23,12 @@ object frmMain: TfrmMain
     object tbLogs: TTabSheet
       Caption = 'Logs'
       ClientHeight = 511
-      ClientWidth = 811
+      ClientWidth = 951
       object mem_General: TMemo
         Left = 0
         Height = 74
         Top = 437
-        Width = 811
+        Width = 951
         Align = alBottom
         Color = clWhite
         Font.Color = clBlack
@@ -43,75 +43,339 @@ object frmMain: TfrmMain
         Left = 0
         Height = 4
         Top = 433
-        Width = 811
+        Width = 951
         Align = alBottom
         ResizeAnchor = akBottom
       end
       object pnl_LogTopMenu: TPanel
         Left = 0
-        Height = 39
+        Height = 95
         Top = 0
-        Width = 811
+        Width = 951
         Align = alTop
-        ClientHeight = 39
-        ClientWidth = 811
+        ClientHeight = 95
+        ClientWidth = 951
         TabOrder = 2
         object btn_SrcOpenCom: TButton
-          Left = 104
+          Left = 75
           Height = 29
-          Top = 5
-          Width = 104
+          Top = 17
+          Width = 77
           Caption = 'Source Start'
           OnClick = btn_SrcOpenComClick
           TabOrder = 0
         end
         object Label1: TLabel
-          Left = 12
+          Left = 3
           Height = 15
-          Top = 13
-          Width = 74
-          Caption = 'Open Comms'
+          Top = 39
+          Width = 66
+          Caption = 'Open Coms:'
           ParentColor = False
         end
         object btn_FwdOpenCom: TButton
-          Left = 224
+          Left = 75
           Height = 29
-          Top = 5
-          Width = 104
+          Top = 50
+          Width = 77
           Caption = 'Forward Start'
           OnClick = btn_FwdOpenComClick
           TabOrder = 1
         end
+        object grp_InstBaud: TGroupBox
+          Left = 159
+          Height = 92
+          Top = -1
+          Width = 279
+          Caption = 'Instant Baud Parameter'
+          ClientHeight = 72
+          ClientWidth = 275
+          TabOrder = 2
+          object grd_InstBaud: TStringGrid
+            Left = 0
+            Height = 72
+            Top = 0
+            Width = 275
+            Align = alClient
+            AutoEdit = False
+            ColCount = 6
+            DefaultColWidth = 45
+            DefaultRowHeight = 22
+            FixedCols = 0
+            FixedRows = 0
+            Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine]
+            RowCount = 3
+            ScrollBars = ssNone
+            TabAdvance = aaNone
+            TabOrder = 0
+            Cells = (
+              18
+              0
+              0
+              '110'
+              0
+              1
+              '9600'
+              0
+              2
+              '115200'
+              1
+              0
+              '300'
+              1
+              1
+              '14400'
+              1
+              2
+              '128000'
+              2
+              0
+              '600'
+              2
+              1
+              '19200'
+              2
+              2
+              '230400'
+              3
+              0
+              '1200'
+              3
+              1
+              '38400'
+              3
+              2
+              '256000'
+              4
+              0
+              '2400'
+              4
+              1
+              '56000'
+              4
+              2
+              '460800'
+              5
+              0
+              '4800'
+              5
+              1
+              '57600'
+              5
+              2
+              '921600'
+            )
+          end
+        end
+        object grp_InstBaud1: TGroupBox
+          Left = 443
+          Height = 92
+          Top = -1
+          Width = 79
+          Caption = 'Inst DataBits'
+          ClientHeight = 72
+          ClientWidth = 75
+          TabOrder = 3
+          object grd_InstBaud1: TStringGrid
+            Left = 0
+            Height = 72
+            Top = 0
+            Width = 75
+            Align = alClient
+            AutoEdit = False
+            ColCount = 2
+            DefaultColWidth = 35
+            DefaultRowHeight = 22
+            FixedCols = 0
+            FixedRows = 0
+            Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine]
+            RowCount = 2
+            ScrollBars = ssNone
+            TabAdvance = aaNone
+            TabOrder = 0
+            Cells = (
+              4
+              0
+              0
+              '5'
+              0
+              1
+              '6'
+              1
+              0
+              '7'
+              1
+              1
+              '8'
+            )
+          end
+        end
+        object grp_InstBaud2: TGroupBox
+          Left = 536
+          Height = 92
+          Top = -1
+          Width = 99
+          Caption = 'Inst Parity'
+          ClientHeight = 72
+          ClientWidth = 95
+          TabOrder = 4
+          object grd_InstBaud2: TStringGrid
+            Left = 0
+            Height = 72
+            Top = 0
+            Width = 95
+            Align = alClient
+            AutoEdit = False
+            ColCount = 2
+            DefaultColWidth = 45
+            DefaultRowHeight = 22
+            FixedCols = 0
+            FixedRows = 0
+            Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine]
+            RowCount = 3
+            ScrollBars = ssNone
+            TabAdvance = aaNone
+            TabOrder = 0
+            Cells = (
+              5
+              0
+              0
+              'None'
+              0
+              1
+              'Even'
+              0
+              2
+              'Space'
+              1
+              0
+              'Odd'
+              1
+              1
+              'Mark'
+            )
+          end
+        end
+        object grp_InstBaud3: TGroupBox
+          Left = 640
+          Height = 92
+          Top = -1
+          Width = 80
+          Caption = 'Inst StopBits'
+          ClientHeight = 72
+          ClientWidth = 76
+          TabOrder = 5
+          object grd_InstBaud3: TStringGrid
+            Left = 0
+            Height = 72
+            Top = 0
+            Width = 76
+            Align = alClient
+            AutoEdit = False
+            ColCount = 1
+            DefaultColWidth = 45
+            DefaultRowHeight = 22
+            FixedCols = 0
+            FixedRows = 0
+            Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine]
+            RowCount = 3
+            ScrollBars = ssNone
+            TabAdvance = aaNone
+            TabOrder = 0
+            Cells = (
+              3
+              0
+              0
+              '1'
+              0
+              1
+              '1.5'
+              0
+              2
+              '2'
+            )
+          end
+        end
+        object grp_InstBaud4: TGroupBox
+          Left = 729
+          Height = 92
+          Top = -1
+          Width = 134
+          Caption = 'Inst Hardware'
+          ClientHeight = 72
+          ClientWidth = 130
+          TabOrder = 6
+          object chk_InstRxDsrSensivity: TCheckBox
+            Left = 4
+            Height = 19
+            Top = 0
+            Width = 95
+            Caption = 'RxDsrSensivity'
+            Color = clBtnFace
+            ParentColor = False
+            TabOrder = 0
+          end
+          object chk_SrcRxRtsEnable1: TCheckBox
+            Left = 4
+            Height = 19
+            Top = 17
+            Width = 83
+            Caption = 'RxRtsEnable'
+            Color = clBtnFace
+            ParentColor = False
+            TabOrder = 1
+          end
+          object chk_SrcRxDtrEnable1: TCheckBox
+            Left = 4
+            Height = 19
+            Top = 33
+            Width = 83
+            Caption = 'RxDtrEnable'
+            Color = clBtnFace
+            ParentColor = False
+            TabOrder = 2
+          end
+          object chk_SrcXonXoff1: TCheckBox
+            Left = 4
+            Height = 19
+            Top = 50
+            Width = 104
+            Caption = 'Xon Xoff Enable'
+            Color = clBtnFace
+            ParentColor = False
+            TabOrder = 3
+          end
+        end
       end
       object pnl_LogsMain: TPanel
         Left = 0
-        Height = 394
-        Top = 39
-        Width = 811
+        Height = 338
+        Top = 95
+        Width = 951
         Align = alClient
-        ClientHeight = 394
-        ClientWidth = 811
+        ClientHeight = 338
+        ClientWidth = 951
         TabOrder = 3
         object spl_Logs: TSplitter
-          Left = 406
-          Height = 392
+          Left = 450
+          Height = 336
           Top = 1
           Width = 4
         end
         object mem_HexLog: TMemo
           Left = 1
-          Height = 392
+          Height = 336
           Top = 1
-          Width = 405
+          Width = 449
           Align = alLeft
           ScrollBars = ssVertical
           TabOrder = 1
         end
         object mem_TextLog: TMemo
-          Left = 410
-          Height = 392
+          Left = 454
+          Height = 336
           Top = 1
-          Width = 400
+          Width = 496
           Align = alClient
           ScrollBars = ssVertical
           TabOrder = 2
@@ -121,7 +385,7 @@ object frmMain: TfrmMain
     object tbSettings: TTabSheet
       Caption = 'Settings'
       ClientHeight = 511
-      ClientWidth = 811
+      ClientWidth = 951
       object grd_Source: TGroupBox
         Left = 9
         Height = 338
@@ -599,8 +863,8 @@ object frmMain: TfrmMain
     Device = 'COM1'
     RcvLineCRLF = False
     OnRxData = LazSerSrcRxData
-    left = 517
-    top = 25
+    left = 328
+    top = 473
   end
   object LazSerFwd: TLazSerial
     Active = False
@@ -612,13 +876,13 @@ object frmMain: TfrmMain
     Device = 'COM1'
     RcvLineCRLF = False
     OnRxData = LazSerFwdRxData
-    left = 574
-    top = 25
+    left = 385
+    top = 473
   end
   object tmrStartUp: TTimer
     Enabled = False
     OnTimer = tmrStartUpTimer
-    left = 637
-    top = 25
+    left = 448
+    top = 473
   end
 end

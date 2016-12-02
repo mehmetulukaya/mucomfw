@@ -12,7 +12,7 @@ uses
   , synaser
   , IniFiles
   , MuLibs    // general library
-  , EditBtn
+  , EditBtn, Grids
 
 
   ;
@@ -27,12 +27,16 @@ type
     btn_SrcOpenCom: TButton;
     chk_SrcRxDsrSensivity: TCheckBox;
     chk_FwdRxDsrSensivity: TCheckBox;
+    chk_InstRxDsrSensivity: TCheckBox;
     chk_SrcRxDtrEnable: TCheckBox;
     chk_FwdRxDtrEnable: TCheckBox;
+    chk_SrcRxDtrEnable1: TCheckBox;
     chk_SrcRxRtsEnable: TCheckBox;
     chk_FwdRxRtsEnable: TCheckBox;
+    chk_SrcRxRtsEnable1: TCheckBox;
     chk_SrcXonXoff: TCheckBox;
     chk_FwdXonXoff: TCheckBox;
+    chk_SrcXonXoff1: TCheckBox;
     cmb_SrcCommBaud: TComboBox;
     cmb_FwdCommBaud: TComboBox;
     cmb_SrcCommDataBit: TComboBox;
@@ -47,8 +51,16 @@ type
     edt_FwdRxBuffSize: TEdit;
     edt_SrcTxBuffSize: TEdit;
     edt_FwdTxBuffSize: TEdit;
+    grd_InstBaud1: TStringGrid;
+    grd_InstBaud2: TStringGrid;
+    grd_InstBaud3: TStringGrid;
     grd_Source: TGroupBox;
+    grp_InstBaud: TGroupBox;
     grp_Forward: TGroupBox;
+    grp_InstBaud1: TGroupBox;
+    grp_InstBaud2: TGroupBox;
+    grp_InstBaud3: TGroupBox;
+    grp_InstBaud4: TGroupBox;
     Label1: TLabel;
     Label10: TLabel;
     Label11: TLabel;
@@ -76,6 +88,7 @@ type
     spd_FwdComCheck: TSpeedButton;
     spl_Logs: TSplitter;
     spl_Bottom: TSplitter;
+    grd_InstBaud: TStringGrid;
     tbLogs: TTabSheet;
     tbSettings: TTabSheet;
     tmrStartUp: TTimer;
