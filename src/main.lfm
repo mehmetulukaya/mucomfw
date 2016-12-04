@@ -1,7 +1,7 @@
 object frmMain: TfrmMain
-  Left = 32
+  Left = 61
   Height = 537
-  Top = 73
+  Top = 120
   Width = 961
   Caption = 'Main'
   ClientHeight = 537
@@ -109,6 +109,7 @@ object frmMain: TfrmMain
             ScrollBars = ssNone
             TabAdvance = aaNone
             TabOrder = 0
+            OnClick = grd_InstBaudClick
             OnPrepareCanvas = grd_InstBaudPrepareCanvas
             Cells = (
               18
@@ -178,7 +179,7 @@ object frmMain: TfrmMain
           ClientHeight = 76
           ClientWidth = 77
           TabOrder = 3
-          object grd_InstBaud1: TStringGrid
+          object grd_InstDataBits: TStringGrid
             Left = 0
             Height = 76
             Top = 0
@@ -195,6 +196,7 @@ object frmMain: TfrmMain
             ScrollBars = ssNone
             TabAdvance = aaNone
             TabOrder = 0
+            OnClick = grd_InstDataBitsClick
             OnPrepareCanvas = grd_InstBaudPrepareCanvas
             Cells = (
               4
@@ -222,7 +224,7 @@ object frmMain: TfrmMain
           ClientHeight = 76
           ClientWidth = 97
           TabOrder = 4
-          object grd_InstBaud2: TStringGrid
+          object grd_InstParity: TStringGrid
             Left = 0
             Height = 76
             Top = 0
@@ -239,6 +241,7 @@ object frmMain: TfrmMain
             ScrollBars = ssNone
             TabAdvance = aaNone
             TabOrder = 0
+            OnClick = grd_InstParityClick
             OnPrepareCanvas = grd_InstBaudPrepareCanvas
             Cells = (
               5
@@ -269,7 +272,7 @@ object frmMain: TfrmMain
           ClientHeight = 76
           ClientWidth = 78
           TabOrder = 5
-          object grd_InstBaud3: TStringGrid
+          object grd_InstStopBits: TStringGrid
             Left = 0
             Height = 76
             Top = 0
@@ -286,6 +289,7 @@ object frmMain: TfrmMain
             ScrollBars = ssNone
             TabAdvance = aaNone
             TabOrder = 0
+            OnClick = grd_InstStopBitsClick
             OnPrepareCanvas = grd_InstBaudPrepareCanvas
             Cells = (
               3
@@ -317,36 +321,40 @@ object frmMain: TfrmMain
             Width = 113
             Caption = 'RxDsrSensivity'
             Color = clBtnFace
+            OnChange = chk_InstRxDsrSensivityChange
             ParentColor = False
             TabOrder = 0
           end
-          object chk_SrcRxRtsEnable1: TCheckBox
+          object chk_InstRxRtsEnable: TCheckBox
             Left = 4
             Height = 22
             Top = 17
             Width = 99
             Caption = 'RxRtsEnable'
             Color = clBtnFace
+            OnChange = chk_InstRxDsrSensivityChange
             ParentColor = False
             TabOrder = 1
           end
-          object chk_SrcRxDtrEnable1: TCheckBox
+          object chk_InstRxDtrEnable: TCheckBox
             Left = 4
             Height = 22
             Top = 33
             Width = 99
             Caption = 'RxDtrEnable'
             Color = clBtnFace
+            OnChange = chk_InstRxDsrSensivityChange
             ParentColor = False
             TabOrder = 2
           end
-          object chk_SrcXonXoff1: TCheckBox
+          object chk_InstXonXoff: TCheckBox
             Left = 4
             Height = 22
             Top = 50
             Width = 119
             Caption = 'Xon Xoff Enable'
             Color = clBtnFace
+            OnChange = chk_InstRxDsrSensivityChange
             ParentColor = False
             TabOrder = 3
           end
@@ -357,6 +365,7 @@ object frmMain: TfrmMain
           Top = 9
           Width = 76
           Caption = 'Auto Set'
+          OnChange = chk_AutoParamsChange
           TabOrder = 7
         end
         object btn_ComParamChange: TButton
@@ -365,6 +374,7 @@ object frmMain: TfrmMain
           Top = 42
           Width = 76
           Caption = 'Set Params'
+          OnClick = btn_ComParamChangeClick
           TabOrder = 8
         end
       end
@@ -884,6 +894,7 @@ object frmMain: TfrmMain
     Device = 'COM1'
     RcvLineCRLF = False
     OnRxData = LazSerSrcRxData
+    OnStatus = LazSerSrcStatus
     left = 328
     top = 473
   end
@@ -897,6 +908,7 @@ object frmMain: TfrmMain
     Device = 'COM1'
     RcvLineCRLF = False
     OnRxData = LazSerFwdRxData
+    OnStatus = LazSerFwdStatus
     left = 385
     top = 473
   end

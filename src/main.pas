@@ -38,13 +38,13 @@ type
     chk_InstRxDsrSensivity: TCheckBox;
     chk_SrcRxDtrEnable: TCheckBox;
     chk_FwdRxDtrEnable: TCheckBox;
-    chk_SrcRxDtrEnable1: TCheckBox;
+    chk_InstRxDtrEnable: TCheckBox;
     chk_SrcRxRtsEnable: TCheckBox;
     chk_FwdRxRtsEnable: TCheckBox;
-    chk_SrcRxRtsEnable1: TCheckBox;
+    chk_InstRxRtsEnable: TCheckBox;
     chk_SrcXonXoff: TCheckBox;
     chk_FwdXonXoff: TCheckBox;
-    chk_SrcXonXoff1: TCheckBox;
+    chk_InstXonXoff: TCheckBox;
     cmb_SrcCommBaud: TComboBox;
     cmb_FwdCommBaud: TComboBox;
     cmb_SrcCommDataBit: TComboBox;
@@ -59,9 +59,9 @@ type
     edt_FwdRxBuffSize: TEdit;
     edt_SrcTxBuffSize: TEdit;
     edt_FwdTxBuffSize: TEdit;
-    grd_InstBaud1: TStringGrid;
-    grd_InstBaud2: TStringGrid;
-    grd_InstBaud3: TStringGrid;
+    grd_InstDataBits: TStringGrid;
+    grd_InstParity: TStringGrid;
+    grd_InstStopBits: TStringGrid;
     grd_Source: TGroupBox;
     grp_InstBaud: TGroupBox;
     grp_Forward: TGroupBox;
@@ -100,17 +100,28 @@ type
     tbLogs: TTabSheet;
     tbSettings: TTabSheet;
     tmrStartUp: TTimer;
+    procedure btn_ComParamChangeClick(Sender: TObject);
     procedure btn_FwdOpenComClick(Sender: TObject);
     procedure btn_SrcOpenComClick(Sender: TObject);
     procedure btn_Save_SettingsClick(Sender: TObject);
+    procedure chk_AutoParamsChange(Sender: TObject);
+    procedure chk_InstRxDsrSensivityChange(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormResize(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure grd_InstBaudClick(Sender: TObject);
     procedure grd_InstBaudPrepareCanvas(sender: TObject; aCol, aRow: Integer;
       aState: TGridDrawState);
+    procedure grd_InstDataBitsClick(Sender: TObject);
+    procedure grd_InstParityClick(Sender: TObject);
+    procedure grd_InstStopBitsClick(Sender: TObject);
     procedure Label1Click(Sender: TObject);
     procedure LazSerFwdRxData(Sender: TObject);
+    procedure LazSerFwdStatus(Sender: TObject; Reason: THookSerialReason;
+      const Value: string);
     procedure LazSerSrcRxData(Sender: TObject);
+    procedure LazSerSrcStatus(Sender: TObject; Reason: THookSerialReason;
+      const Value: string);
     procedure spd_FwdComCheckClick(Sender: TObject);
     procedure spd_SrcComCheckClick(Sender: TObject);
     procedure tmrStartUpTimer(Sender: TObject);
@@ -159,6 +170,15 @@ begin
   tmrStartUp.Enabled:=True;
 end;
 
+procedure TfrmMain.grd_InstBaudClick(Sender: TObject);
+begin
+  if chk_AutoParams.Checked then
+    begin
+      LazSerSrc.BaudRate:=StrToBaudRate(GrdCellValue(grd_InstBaud));
+      LazSerFwd.BaudRate:=StrToBaudRate(GrdCellValue(grd_InstBaud));
+    end;
+end;
+
 procedure TfrmMain.grd_InstBaudPrepareCanvas(sender: TObject; aCol,
   aRow: Integer; aState: TGridDrawState);
 begin
@@ -167,6 +187,33 @@ begin
     if (aCol=Col) and (aRow=Row) then
       Canvas.Brush.Color:=clLime;
   end;
+end;
+
+procedure TfrmMain.grd_InstDataBitsClick(Sender: TObject);
+begin
+  if chk_AutoParams.Checked then
+    begin
+      LazSerSrc.DataBits:=StrToDataBits(GrdCellValue(grd_InstDataBits));
+      LazSerFwd.DataBits:=StrToDataBits(GrdCellValue(grd_InstDataBits));
+    end;
+end;
+
+procedure TfrmMain.grd_InstParityClick(Sender: TObject);
+begin
+  if chk_AutoParams.Checked then
+    begin
+      LazSerSrc.Parity:=StrToParity(GrdCellValue(grd_InstParity));
+      LazSerFwd.Parity:=StrToParity(GrdCellValue(grd_InstParity));
+    end;
+end;
+
+procedure TfrmMain.grd_InstStopBitsClick(Sender: TObject);
+begin
+  if chk_AutoParams.Checked then
+    begin
+      LazSerSrc.StopBits:=StrToStopBits(GrdCellValue(grd_InstStopBits));
+      LazSerFwd.StopBits:=StrToStopBits(GrdCellValue(grd_InstStopBits));
+    end;
 end;
 
 procedure TfrmMain.Label1Click(Sender: TObject);
@@ -178,9 +225,9 @@ begin
   grd_InstBaud.Row:=coord.Row;
 
   LogAdd(mem_General,GrdCellValue(grd_InstBaud));
-  LogAdd(mem_General,GrdCellValue(grd_InstBaud1));
-  LogAdd(mem_General,GrdCellValue(grd_InstBaud2));
-  LogAdd(mem_General,GrdCellValue(grd_InstBaud3));
+  LogAdd(mem_General,GrdCellValue(grd_InstDataBits));
+  LogAdd(mem_General,GrdCellValue(grd_InstParity));
+  LogAdd(mem_General,GrdCellValue(grd_InstStopBits));
 
 end;
 
@@ -198,6 +245,12 @@ begin
     end;
 end;
 
+procedure TfrmMain.LazSerFwdStatus(Sender: TObject; Reason: THookSerialReason;
+  const Value: string);
+begin
+  LogAdd(mem_General,'Forward Port Status: '+Value);
+end;
+
 procedure TfrmMain.LazSerSrcRxData(Sender: TObject);
 var
   s:String;
@@ -210,6 +263,12 @@ begin
       LogAdd(mem_HexLog,'SND: '+StrToHex(s));
       LogAdd(mem_TextLog,'SND: '+s);
     end;
+end;
+
+procedure TfrmMain.LazSerSrcStatus(Sender: TObject; Reason: THookSerialReason;
+  const Value: string);
+begin
+  LogAdd(mem_General,'Source Port Status: '+Value);
 end;
 
 procedure TfrmMain.spd_FwdComCheckClick(Sender: TObject);
@@ -235,6 +294,7 @@ end;
 procedure TfrmMain.tmrStartUpTimer(Sender: TObject);
 begin
   tmrStartUp.Enabled:=False;
+  chk_AutoParamsChange(nil);
   LogAdd(mem_General,'Started');
   EnumComPorts(cmb_SrcCommPort.Items);
   EnumComPorts(cmb_FwdCommPort.Items);
@@ -276,6 +336,46 @@ end;
 procedure TfrmMain.btn_Save_SettingsClick(Sender: TObject);
 begin
   SaveConf;
+end;
+
+procedure TfrmMain.chk_AutoParamsChange(Sender: TObject);
+begin
+  btn_ComParamChange.Enabled:=not chk_AutoParams.Checked;
+end;
+
+procedure TfrmMain.chk_InstRxDsrSensivityChange(Sender: TObject);
+begin
+  if chk_AutoParams.Checked then
+    begin
+      with LazSerSrc do
+      begin
+        if (chk_InstRxDtrEnable.Checked) or
+           (chk_InstRxRtsEnable.Checked) or
+           (chk_InstRxDsrSensivity.Checked) then
+          FlowControl := fcHardware
+        else
+          FlowControl := fcNone;
+
+        if chk_InstXonXoff.Checked then
+          FlowControl  := fcXonXoff
+        else
+          FlowControl  := fcNone;
+      end;
+      with LazSerFwd do
+      begin
+        if (chk_InstRxDtrEnable.Checked) or
+           (chk_InstRxRtsEnable.Checked) or
+           (chk_InstRxDsrSensivity.Checked) then
+          FlowControl := fcHardware
+        else
+          FlowControl := fcNone;
+
+        if chk_InstXonXoff.Checked then
+          FlowControl  := fcXonXoff
+        else
+          FlowControl  := fcNone;
+      end;
+    end;
 end;
 
 procedure TfrmMain.btn_SrcOpenComClick(Sender: TObject);
@@ -434,6 +534,49 @@ begin
 
       end; //with LazSerSrc do
 
+  end;
+
+end;
+
+procedure TfrmMain.btn_ComParamChangeClick(Sender: TObject);
+begin
+  LazSerSrc.BaudRate:=StrToBaudRate(GrdCellValue(grd_InstBaud));
+  LazSerFwd.BaudRate:=StrToBaudRate(GrdCellValue(grd_InstBaud));
+  LazSerSrc.DataBits:=StrToDataBits(GrdCellValue(grd_InstDataBits));
+  LazSerFwd.DataBits:=StrToDataBits(GrdCellValue(grd_InstDataBits));
+  LazSerSrc.Parity:=StrToParity(GrdCellValue(grd_InstParity));
+  LazSerFwd.Parity:=StrToParity(GrdCellValue(grd_InstParity));
+  LazSerSrc.StopBits:=StrToStopBits(GrdCellValue(grd_InstStopBits));
+  LazSerFwd.StopBits:=StrToStopBits(GrdCellValue(grd_InstStopBits));
+
+  with LazSerSrc do
+  begin
+    if (chk_InstRxDtrEnable.Checked) or
+       (chk_InstRxRtsEnable.Checked) or
+       (chk_InstRxDsrSensivity.Checked) then
+      FlowControl := fcHardware
+    else
+      FlowControl := fcNone;
+
+    if chk_InstXonXoff.Checked then
+      FlowControl  := fcXonXoff
+    else
+      FlowControl  := fcNone;
+  end;
+
+  with LazSerFwd do
+  begin
+    if (chk_InstRxDtrEnable.Checked) or
+       (chk_InstRxRtsEnable.Checked) or
+       (chk_InstRxDsrSensivity.Checked) then
+      FlowControl := fcHardware
+    else
+      FlowControl := fcNone;
+
+    if chk_InstXonXoff.Checked then
+      FlowControl  := fcXonXoff
+    else
+      FlowControl  := fcNone;
   end;
 
 end;
