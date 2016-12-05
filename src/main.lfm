@@ -1,19 +1,21 @@
 object frmMain: TfrmMain
-  Left = 61
+  Left = 228
   Height = 537
-  Top = 120
+  Top = 71
   Width = 961
   Caption = 'Main'
-  ClientHeight = 537
+  ClientHeight = 517
   ClientWidth = 961
+  Menu = menu_Main
+  OnClose = FormClose
   OnCreate = FormCreate
   OnResize = FormResize
   OnShow = FormShow
   Position = poDesktopCenter
-  LCLVersion = '1.6.2.0'
+  LCLVersion = '1.6.0.4'
   object pgMain: TPageControl
     Left = 0
-    Height = 537
+    Height = 517
     Top = 0
     Width = 961
     ActivePage = tbLogs
@@ -22,13 +24,13 @@ object frmMain: TfrmMain
     TabOrder = 0
     object tbLogs: TTabSheet
       Caption = 'Logs'
-      ClientHeight = 504
-      ClientWidth = 955
+      ClientHeight = 489
+      ClientWidth = 953
       object mem_General: TMemo
         Left = 0
         Height = 74
-        Top = 430
-        Width = 955
+        Top = 415
+        Width = 953
         Align = alBottom
         Color = clWhite
         Font.Color = clBlack
@@ -42,371 +44,405 @@ object frmMain: TfrmMain
         Cursor = crVSplit
         Left = 0
         Height = 4
-        Top = 426
-        Width = 955
+        Top = 411
+        Width = 953
         Align = alBottom
         ResizeAnchor = akBottom
       end
       object pnl_LogTopMenu: TPanel
         Left = 0
-        Height = 100
+        Height = 122
         Top = 0
-        Width = 955
+        Width = 953
         Align = alTop
-        ClientHeight = 100
-        ClientWidth = 955
+        ClientHeight = 122
+        ClientWidth = 953
         TabOrder = 2
-        object btn_SrcOpenCom: TButton
-          Left = 8
-          Height = 29
-          Top = 29
-          Width = 95
-          Caption = 'Source Start'
-          OnClick = btn_SrcOpenComClick
+        object scrl_ComParam: TScrollBox
+          Left = 114
+          Height = 120
+          Top = 1
+          Width = 838
+          HorzScrollBar.Page = 829
+          VertScrollBar.Page = 95
+          Align = alClient
+          ClientHeight = 116
+          ClientWidth = 834
           TabOrder = 0
-        end
-        object Label1: TLabel
-          Left = 8
-          Height = 15
-          Top = 3
-          Width = 73
-          Caption = 'Open Coms:'
-          ParentColor = False
-          OnClick = Label1Click
-        end
-        object btn_FwdOpenCom: TButton
-          Left = 8
-          Height = 29
-          Top = 66
-          Width = 95
-          Caption = 'Forward Start'
-          OnClick = btn_FwdOpenComClick
-          TabOrder = 1
-        end
-        object grp_InstBaud: TGroupBox
-          Left = 109
-          Height = 92
-          Top = 3
-          Width = 337
-          Caption = 'Instant Baud Parameter'
-          ClientHeight = 76
-          ClientWidth = 335
-          TabOrder = 2
-          object grd_InstBaud: TStringGrid
-            Left = 0
-            Height = 76
-            Top = 0
-            Width = 335
-            Align = alClient
-            AutoEdit = False
-            ColCount = 6
-            DefaultColWidth = 55
-            DefaultRowHeight = 22
-            FixedCols = 0
-            FixedRows = 0
-            Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine]
-            RowCount = 3
-            ScrollBars = ssNone
-            TabAdvance = aaNone
+          object grp_InstBaud: TGroupBox
+            Left = 8
+            Height = 92
+            Top = 3
+            Width = 341
+            Caption = 'Instant Baud Parameter'
+            ClientHeight = 72
+            ClientWidth = 337
             TabOrder = 0
-            OnClick = grd_InstBaudClick
-            OnPrepareCanvas = grd_InstBaudPrepareCanvas
-            Cells = (
-              18
-              0
-              0
-              '110'
-              0
-              1
-              '9600'
-              0
-              2
-              '115200'
-              1
-              0
-              '300'
-              1
-              1
-              '14400'
-              1
-              2
-              '128000'
-              2
-              0
-              '600'
-              2
-              1
-              '19200'
-              2
-              2
-              '230400'
-              3
-              0
-              '1200'
-              3
-              1
-              '38400'
-              3
-              2
-              '256000'
-              4
-              0
-              '2400'
-              4
-              1
-              '56000'
-              4
-              2
-              '460800'
-              5
-              0
-              '4800'
-              5
-              1
-              '57600'
-              5
-              2
-              '921600'
-            )
+            object grd_InstBaud: TStringGrid
+              Left = 0
+              Height = 72
+              Hint = 'Double click to change parameter'
+              Top = 0
+              Width = 337
+              Align = alClient
+              AutoEdit = False
+              ColCount = 6
+              DefaultColWidth = 55
+              DefaultRowHeight = 22
+              FixedCols = 0
+              FixedRows = 0
+              Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine]
+              ParentShowHint = False
+              RowCount = 3
+              ScrollBars = ssNone
+              ShowHint = True
+              TabAdvance = aaNone
+              TabOrder = 0
+              OnDblClick = grd_InstBaudDblClick
+              OnPrepareCanvas = grd_InstBaudPrepareCanvas
+              Cells = (
+                18
+                0
+                0
+                '110'
+                0
+                1
+                '9600'
+                0
+                2
+                '115200'
+                1
+                0
+                '300'
+                1
+                1
+                '14400'
+                1
+                2
+                '128000'
+                2
+                0
+                '600'
+                2
+                1
+                '19200'
+                2
+                2
+                '230400'
+                3
+                0
+                '1200'
+                3
+                1
+                '38400'
+                3
+                2
+                '256000'
+                4
+                0
+                '2400'
+                4
+                1
+                '56000'
+                4
+                2
+                '460800'
+                5
+                0
+                '4800'
+                5
+                1
+                '57600'
+                5
+                2
+                '921600'
+              )
+            end
           end
-        end
-        object grp_InstBaud1: TGroupBox
-          Left = 452
-          Height = 92
-          Top = 3
-          Width = 79
-          Caption = 'Inst DataBits'
-          ClientHeight = 76
-          ClientWidth = 77
-          TabOrder = 3
-          object grd_InstDataBits: TStringGrid
-            Left = 0
-            Height = 76
-            Top = 0
-            Width = 77
-            Align = alClient
-            AutoEdit = False
-            ColCount = 2
-            DefaultColWidth = 35
-            DefaultRowHeight = 22
-            FixedCols = 0
-            FixedRows = 0
-            Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine]
-            RowCount = 2
-            ScrollBars = ssNone
-            TabAdvance = aaNone
-            TabOrder = 0
-            OnClick = grd_InstDataBitsClick
-            OnPrepareCanvas = grd_InstBaudPrepareCanvas
-            Cells = (
-              4
-              0
-              0
-              '5'
-              0
-              1
-              '6'
-              1
-              0
-              '7'
-              1
-              1
-              '8'
-            )
+          object grp_InstBaud1: TGroupBox
+            Left = 354
+            Height = 92
+            Top = 3
+            Width = 79
+            Caption = 'Inst DataBits'
+            ClientHeight = 72
+            ClientWidth = 75
+            TabOrder = 1
+            object grd_InstDataBits: TStringGrid
+              Left = 0
+              Height = 72
+              Hint = 'Double click to change parameter'
+              Top = 0
+              Width = 75
+              Align = alClient
+              AutoEdit = False
+              ColCount = 2
+              DefaultColWidth = 35
+              DefaultRowHeight = 22
+              FixedCols = 0
+              FixedRows = 0
+              Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine]
+              ParentShowHint = False
+              RowCount = 2
+              ScrollBars = ssNone
+              ShowHint = True
+              TabAdvance = aaNone
+              TabOrder = 0
+              OnClick = grd_InstDataBitsClick
+              OnPrepareCanvas = grd_InstBaudPrepareCanvas
+              Cells = (
+                4
+                0
+                0
+                '5'
+                0
+                1
+                '6'
+                1
+                0
+                '7'
+                1
+                1
+                '8'
+              )
+            end
           end
-        end
-        object grp_InstBaud2: TGroupBox
-          Left = 536
-          Height = 92
-          Top = 3
-          Width = 99
-          Caption = 'Inst Parity'
-          ClientHeight = 76
-          ClientWidth = 97
-          TabOrder = 4
-          object grd_InstParity: TStringGrid
-            Left = 0
-            Height = 76
-            Top = 0
-            Width = 97
-            Align = alClient
-            AutoEdit = False
-            ColCount = 2
-            DefaultColWidth = 45
-            DefaultRowHeight = 22
-            FixedCols = 0
-            FixedRows = 0
-            Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine]
-            RowCount = 3
-            ScrollBars = ssNone
-            TabAdvance = aaNone
-            TabOrder = 0
-            OnClick = grd_InstParityClick
-            OnPrepareCanvas = grd_InstBaudPrepareCanvas
-            Cells = (
-              5
-              0
-              0
-              'None'
-              0
-              1
-              'Even'
-              0
-              2
-              'Space'
-              1
-              0
-              'Odd'
-              1
-              1
-              'Mark'
-            )
-          end
-        end
-        object grp_InstBaud3: TGroupBox
-          Left = 640
-          Height = 92
-          Top = 3
-          Width = 80
-          Caption = 'Inst StopBits'
-          ClientHeight = 76
-          ClientWidth = 78
-          TabOrder = 5
-          object grd_InstStopBits: TStringGrid
-            Left = 0
-            Height = 76
-            Top = 0
-            Width = 78
-            Align = alClient
-            AutoEdit = False
-            ColCount = 1
-            DefaultColWidth = 45
-            DefaultRowHeight = 22
-            FixedCols = 0
-            FixedRows = 0
-            Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine]
-            RowCount = 3
-            ScrollBars = ssNone
-            TabAdvance = aaNone
-            TabOrder = 0
-            OnClick = grd_InstStopBitsClick
-            OnPrepareCanvas = grd_InstBaudPrepareCanvas
-            Cells = (
-              3
-              0
-              0
-              '1'
-              0
-              1
-              '1.5'
-              0
-              2
-              '2'
-            )
-          end
-        end
-        object grp_InstBaud4: TGroupBox
-          Left = 722
-          Height = 92
-          Top = 3
-          Width = 127
-          Caption = 'Inst Hardware'
-          ClientHeight = 76
-          ClientWidth = 125
-          TabOrder = 6
-          object chk_InstRxDsrSensivity: TCheckBox
-            Left = 4
-            Height = 22
-            Top = 0
-            Width = 113
-            Caption = 'RxDsrSensivity'
-            Color = clBtnFace
-            OnChange = chk_InstRxDsrSensivityChange
-            ParentColor = False
-            TabOrder = 0
-          end
-          object chk_InstRxRtsEnable: TCheckBox
-            Left = 4
-            Height = 22
-            Top = 17
+          object grp_InstBaud2: TGroupBox
+            Left = 437
+            Height = 92
+            Top = 3
             Width = 99
-            Caption = 'RxRtsEnable'
-            Color = clBtnFace
-            OnChange = chk_InstRxDsrSensivityChange
+            Caption = 'Inst Parity'
+            ClientHeight = 72
+            ClientWidth = 95
+            TabOrder = 2
+            object grd_InstParity: TStringGrid
+              Left = 0
+              Height = 72
+              Hint = 'Double click to change parameter'
+              Top = 0
+              Width = 95
+              Align = alClient
+              AutoEdit = False
+              ColCount = 2
+              DefaultColWidth = 45
+              DefaultRowHeight = 22
+              FixedCols = 0
+              FixedRows = 0
+              Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine]
+              ParentShowHint = False
+              RowCount = 3
+              ScrollBars = ssNone
+              ShowHint = True
+              TabAdvance = aaNone
+              TabOrder = 0
+              OnClick = grd_InstParityClick
+              OnPrepareCanvas = grd_InstBaudPrepareCanvas
+              Cells = (
+                5
+                0
+                0
+                'None'
+                0
+                1
+                'Even'
+                0
+                2
+                'Space'
+                1
+                0
+                'Odd'
+                1
+                1
+                'Mark'
+              )
+            end
+          end
+          object grp_InstBaud3: TGroupBox
+            Left = 540
+            Height = 92
+            Top = 3
+            Width = 80
+            Caption = 'Inst StopBits'
+            ClientHeight = 72
+            ClientWidth = 76
+            TabOrder = 3
+            object grd_InstStopBits: TStringGrid
+              Left = 0
+              Height = 72
+              Hint = 'Double click to change parameter'
+              Top = 0
+              Width = 76
+              Align = alClient
+              AutoEdit = False
+              ColCount = 1
+              DefaultColWidth = 45
+              DefaultRowHeight = 22
+              FixedCols = 0
+              FixedRows = 0
+              Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine]
+              ParentShowHint = False
+              RowCount = 3
+              ScrollBars = ssNone
+              ShowHint = True
+              TabAdvance = aaNone
+              TabOrder = 0
+              OnClick = grd_InstStopBitsClick
+              OnPrepareCanvas = grd_InstBaudPrepareCanvas
+              Cells = (
+                3
+                0
+                0
+                '1'
+                0
+                1
+                '1.5'
+                0
+                2
+                '2'
+              )
+            end
+          end
+          object grp_InstBaud4: TGroupBox
+            Left = 621
+            Height = 92
+            Top = 3
+            Width = 127
+            Caption = 'Inst Hardware'
+            ClientHeight = 72
+            ClientWidth = 123
+            TabOrder = 4
+            object chk_InstRxDsrSensivity: TCheckBox
+              Left = 4
+              Height = 19
+              Top = 0
+              Width = 95
+              Caption = 'RxDsrSensivity'
+              Color = clBtnFace
+              OnChange = chk_InstRxDsrSensivityChange
+              ParentColor = False
+              TabOrder = 0
+            end
+            object chk_InstRxRtsEnable: TCheckBox
+              Left = 4
+              Height = 19
+              Top = 17
+              Width = 83
+              Caption = 'RxRtsEnable'
+              Color = clBtnFace
+              OnChange = chk_InstRxDsrSensivityChange
+              ParentColor = False
+              TabOrder = 1
+            end
+            object chk_InstRxDtrEnable: TCheckBox
+              Left = 4
+              Height = 19
+              Top = 33
+              Width = 83
+              Caption = 'RxDtrEnable'
+              Color = clBtnFace
+              OnChange = chk_InstRxDsrSensivityChange
+              ParentColor = False
+              TabOrder = 2
+            end
+            object chk_InstXonXoff: TCheckBox
+              Left = 4
+              Height = 19
+              Top = 50
+              Width = 104
+              Caption = 'Xon Xoff Enable'
+              Color = clBtnFace
+              OnChange = chk_InstRxDsrSensivityChange
+              ParentColor = False
+              TabOrder = 3
+            end
+          end
+          object chk_AutoParams: TCheckBox
+            Left = 753
+            Height = 19
+            Top = 9
+            Width = 65
+            Caption = 'Auto Set'
+            OnChange = chk_AutoParamsChange
+            TabOrder = 5
+            Visible = False
+          end
+          object btn_ComParamChange: TButton
+            Left = 753
+            Height = 32
+            Top = 42
+            Width = 76
+            Caption = 'Set Params'
+            OnClick = btn_ComParamChangeClick
+            TabOrder = 6
+          end
+        end
+        object pnl_OpenComs: TPanel
+          Left = 1
+          Height = 120
+          Top = 1
+          Width = 113
+          Align = alLeft
+          ClientHeight = 120
+          ClientWidth = 113
+          TabOrder = 1
+          object Label1: TLabel
+            Left = 8
+            Height = 15
+            Top = 3
+            Width = 66
+            Caption = 'Open Coms:'
             ParentColor = False
+          end
+          object btn_SrcOpenCom: TButton
+            Left = 8
+            Height = 29
+            Top = 29
+            Width = 95
+            Caption = 'Source Start'
+            OnClick = btn_SrcOpenComClick
+            TabOrder = 0
+          end
+          object btn_FwdOpenCom: TButton
+            Left = 8
+            Height = 29
+            Top = 66
+            Width = 95
+            Caption = 'Forward Start'
+            OnClick = btn_FwdOpenComClick
             TabOrder = 1
           end
-          object chk_InstRxDtrEnable: TCheckBox
-            Left = 4
-            Height = 22
-            Top = 33
-            Width = 99
-            Caption = 'RxDtrEnable'
-            Color = clBtnFace
-            OnChange = chk_InstRxDsrSensivityChange
-            ParentColor = False
-            TabOrder = 2
-          end
-          object chk_InstXonXoff: TCheckBox
-            Left = 4
-            Height = 22
-            Top = 50
-            Width = 119
-            Caption = 'Xon Xoff Enable'
-            Color = clBtnFace
-            OnChange = chk_InstRxDsrSensivityChange
-            ParentColor = False
-            TabOrder = 3
-          end
-        end
-        object chk_AutoParams: TCheckBox
-          Left = 854
-          Height = 22
-          Top = 9
-          Width = 76
-          Caption = 'Auto Set'
-          OnChange = chk_AutoParamsChange
-          TabOrder = 7
-        end
-        object btn_ComParamChange: TButton
-          Left = 854
-          Height = 32
-          Top = 42
-          Width = 76
-          Caption = 'Set Params'
-          OnClick = btn_ComParamChangeClick
-          TabOrder = 8
         end
       end
       object pnl_LogsMain: TPanel
         Left = 0
-        Height = 326
-        Top = 100
-        Width = 955
+        Height = 289
+        Top = 122
+        Width = 953
         Align = alClient
-        ClientHeight = 326
-        ClientWidth = 955
+        ClientHeight = 289
+        ClientWidth = 953
         TabOrder = 3
         object spl_Logs: TSplitter
-          Left = 450
-          Height = 324
+          Left = 474
+          Height = 287
           Top = 1
           Width = 4
         end
         object mem_HexLog: TMemo
           Left = 1
-          Height = 324
+          Height = 287
           Top = 1
-          Width = 449
+          Width = 473
           Align = alLeft
           ScrollBars = ssVertical
           TabOrder = 1
         end
         object mem_TextLog: TMemo
-          Left = 454
-          Height = 324
+          Left = 478
+          Height = 287
           Top = 1
-          Width = 500
+          Width = 474
           Align = alClient
           ScrollBars = ssVertical
           TabOrder = 2
@@ -415,16 +451,16 @@ object frmMain: TfrmMain
     end
     object tbSettings: TTabSheet
       Caption = 'Settings'
-      ClientHeight = 504
-      ClientWidth = 955
+      ClientHeight = 489
+      ClientWidth = 953
       object grd_Source: TGroupBox
         Left = 9
         Height = 338
         Top = 7
         Width = 220
         Caption = 'Source COM Port:'
-        ClientHeight = 322
-        ClientWidth = 218
+        ClientHeight = 318
+        ClientWidth = 216
         TabOrder = 0
         object spd_SrcComCheck: TSpeedButton
           Left = 172
@@ -436,12 +472,12 @@ object frmMain: TfrmMain
         end
         object cmb_SrcCommPort: TComboBox
           Left = 89
-          Height = 25
+          Height = 22
           Top = 6
           Width = 79
           Font.Height = -11
           Font.Name = 'Sans'
-          ItemHeight = 0
+          ItemHeight = 14
           ItemIndex = 0
           Items.Strings = (
             '-'
@@ -455,7 +491,7 @@ object frmMain: TfrmMain
           Left = 16
           Height = 15
           Top = 9
-          Width = 75
+          Width = 68
           Caption = 'Comm. Port:'
           ParentColor = False
         end
@@ -463,16 +499,16 @@ object frmMain: TfrmMain
           Left = 16
           Height = 15
           Top = 35
-          Width = 66
+          Width = 56
           Caption = 'Baud Rate:'
           ParentColor = False
         end
         object cmb_SrcCommBaud: TComboBox
           Left = 89
-          Height = 25
+          Height = 23
           Top = 32
           Width = 79
-          ItemHeight = 0
+          ItemHeight = 15
           ItemIndex = 2
           Items.Strings = (
             '110'
@@ -494,10 +530,10 @@ object frmMain: TfrmMain
         end
         object cmb_SrcCommDataBit: TComboBox
           Left = 89
-          Height = 25
+          Height = 23
           Top = 59
           Width = 79
-          ItemHeight = 0
+          ItemHeight = 15
           ItemIndex = 2
           Items.Strings = (
             '5'
@@ -513,7 +549,7 @@ object frmMain: TfrmMain
           Left = 16
           Height = 15
           Top = 65
-          Width = 58
+          Width = 49
           Caption = 'Data Bits:'
           ParentColor = False
         end
@@ -521,16 +557,16 @@ object frmMain: TfrmMain
           Left = 16
           Height = 15
           Top = 92
-          Width = 36
+          Width = 33
           Caption = 'Parity:'
           ParentColor = False
         end
         object cmb_SrcCommParity: TComboBox
           Left = 89
-          Height = 25
+          Height = 23
           Top = 86
           Width = 79
-          ItemHeight = 0
+          ItemHeight = 15
           ItemIndex = 2
           Items.Strings = (
             'None'
@@ -545,10 +581,10 @@ object frmMain: TfrmMain
         end
         object cmb_SrcCommStopBit: TComboBox
           Left = 89
-          Height = 25
+          Height = 23
           Top = 113
           Width = 79
-          ItemHeight = 0
+          ItemHeight = 15
           ItemIndex = 0
           Items.Strings = (
             '1'
@@ -563,15 +599,15 @@ object frmMain: TfrmMain
           Left = 16
           Height = 15
           Top = 119
-          Width = 58
+          Width = 49
           Caption = 'Stop Bits:'
           ParentColor = False
         end
         object chk_SrcRxDsrSensivity: TCheckBox
           Left = 16
-          Height = 22
+          Height = 19
           Top = 145
-          Width = 113
+          Width = 95
           Caption = 'RxDsrSensivity'
           Color = clBtnFace
           ParentColor = False
@@ -579,9 +615,9 @@ object frmMain: TfrmMain
         end
         object chk_SrcRxRtsEnable: TCheckBox
           Left = 16
-          Height = 22
+          Height = 19
           Top = 168
-          Width = 99
+          Width = 83
           Caption = 'RxRtsEnable'
           Color = clBtnFace
           ParentColor = False
@@ -589,9 +625,9 @@ object frmMain: TfrmMain
         end
         object chk_SrcRxDtrEnable: TCheckBox
           Left = 16
-          Height = 22
+          Height = 19
           Top = 191
-          Width = 99
+          Width = 83
           Caption = 'RxDtrEnable'
           Color = clBtnFace
           ParentColor = False
@@ -599,9 +635,9 @@ object frmMain: TfrmMain
         end
         object chk_SrcXonXoff: TCheckBox
           Left = 16
-          Height = 22
+          Height = 19
           Top = 214
-          Width = 119
+          Width = 104
           Caption = 'Xon Xoff Enable'
           Color = clBtnFace
           ParentColor = False
@@ -611,7 +647,7 @@ object frmMain: TfrmMain
           Left = 16
           Height = 15
           Top = 242
-          Width = 70
+          Width = 60
           Caption = 'Tx Buff Size'
           ParentColor = False
           Visible = False
@@ -620,14 +656,14 @@ object frmMain: TfrmMain
           Left = 16
           Height = 15
           Top = 267
-          Width = 71
+          Width = 60
           Caption = 'Rx Buff Size'
           ParentColor = False
           Visible = False
         end
         object edt_SrcTxBuffSize: TEdit
           Left = 89
-          Height = 25
+          Height = 23
           Top = 238
           Width = 72
           ParentBidiMode = False
@@ -637,7 +673,7 @@ object frmMain: TfrmMain
         end
         object edt_SrcRxBuffSize: TEdit
           Left = 89
-          Height = 25
+          Height = 23
           Top = 263
           Width = 72
           TabOrder = 10
@@ -651,8 +687,8 @@ object frmMain: TfrmMain
         Top = 7
         Width = 220
         Caption = 'Target COM Port:'
-        ClientHeight = 322
-        ClientWidth = 218
+        ClientHeight = 318
+        ClientWidth = 216
         TabOrder = 1
         object spd_FwdComCheck: TSpeedButton
           Left = 172
@@ -664,12 +700,12 @@ object frmMain: TfrmMain
         end
         object cmb_FwdCommPort: TComboBox
           Left = 89
-          Height = 25
+          Height = 22
           Top = 6
           Width = 79
           Font.Height = -11
           Font.Name = 'Sans'
-          ItemHeight = 0
+          ItemHeight = 14
           ItemIndex = 0
           Items.Strings = (
             '-'
@@ -683,7 +719,7 @@ object frmMain: TfrmMain
           Left = 16
           Height = 15
           Top = 9
-          Width = 75
+          Width = 68
           Caption = 'Comm. Port:'
           ParentColor = False
         end
@@ -691,16 +727,16 @@ object frmMain: TfrmMain
           Left = 16
           Height = 15
           Top = 35
-          Width = 66
+          Width = 56
           Caption = 'Baud Rate:'
           ParentColor = False
         end
         object cmb_FwdCommBaud: TComboBox
           Left = 89
-          Height = 25
+          Height = 23
           Top = 32
           Width = 79
-          ItemHeight = 0
+          ItemHeight = 15
           ItemIndex = 2
           Items.Strings = (
             '110'
@@ -722,10 +758,10 @@ object frmMain: TfrmMain
         end
         object cmb_FwdCommDataBit: TComboBox
           Left = 89
-          Height = 25
+          Height = 23
           Top = 59
           Width = 79
-          ItemHeight = 0
+          ItemHeight = 15
           ItemIndex = 2
           Items.Strings = (
             '5'
@@ -741,7 +777,7 @@ object frmMain: TfrmMain
           Left = 16
           Height = 15
           Top = 65
-          Width = 58
+          Width = 49
           Caption = 'Data Bits:'
           ParentColor = False
         end
@@ -749,16 +785,16 @@ object frmMain: TfrmMain
           Left = 16
           Height = 15
           Top = 92
-          Width = 36
+          Width = 33
           Caption = 'Parity:'
           ParentColor = False
         end
         object cmb_FwdCommParity: TComboBox
           Left = 89
-          Height = 25
+          Height = 23
           Top = 86
           Width = 79
-          ItemHeight = 0
+          ItemHeight = 15
           ItemIndex = 2
           Items.Strings = (
             'None'
@@ -773,10 +809,10 @@ object frmMain: TfrmMain
         end
         object cmb_FwdCommStopBit: TComboBox
           Left = 89
-          Height = 25
+          Height = 23
           Top = 113
           Width = 79
-          ItemHeight = 0
+          ItemHeight = 15
           ItemIndex = 0
           Items.Strings = (
             '1'
@@ -791,15 +827,15 @@ object frmMain: TfrmMain
           Left = 16
           Height = 15
           Top = 119
-          Width = 58
+          Width = 49
           Caption = 'Stop Bits:'
           ParentColor = False
         end
         object chk_FwdRxDsrSensivity: TCheckBox
           Left = 16
-          Height = 22
+          Height = 19
           Top = 145
-          Width = 113
+          Width = 95
           Caption = 'RxDsrSensivity'
           Color = clBtnFace
           ParentColor = False
@@ -807,9 +843,9 @@ object frmMain: TfrmMain
         end
         object chk_FwdRxRtsEnable: TCheckBox
           Left = 16
-          Height = 22
+          Height = 19
           Top = 168
-          Width = 99
+          Width = 83
           Caption = 'RxRtsEnable'
           Color = clBtnFace
           ParentColor = False
@@ -817,9 +853,9 @@ object frmMain: TfrmMain
         end
         object chk_FwdRxDtrEnable: TCheckBox
           Left = 16
-          Height = 22
+          Height = 19
           Top = 191
-          Width = 99
+          Width = 83
           Caption = 'RxDtrEnable'
           Color = clBtnFace
           ParentColor = False
@@ -827,9 +863,9 @@ object frmMain: TfrmMain
         end
         object chk_FwdXonXoff: TCheckBox
           Left = 16
-          Height = 22
+          Height = 19
           Top = 214
-          Width = 119
+          Width = 104
           Caption = 'Xon Xoff Enable'
           Color = clBtnFace
           ParentColor = False
@@ -839,7 +875,7 @@ object frmMain: TfrmMain
           Left = 16
           Height = 15
           Top = 242
-          Width = 70
+          Width = 60
           Caption = 'Tx Buff Size'
           ParentColor = False
           Visible = False
@@ -848,14 +884,14 @@ object frmMain: TfrmMain
           Left = 16
           Height = 15
           Top = 267
-          Width = 71
+          Width = 60
           Caption = 'Rx Buff Size'
           ParentColor = False
           Visible = False
         end
         object edt_FwdTxBuffSize: TEdit
           Left = 89
-          Height = 25
+          Height = 23
           Top = 238
           Width = 72
           ParentBidiMode = False
@@ -865,7 +901,7 @@ object frmMain: TfrmMain
         end
         object edt_FwdRxBuffSize: TEdit
           Left = 89
-          Height = 25
+          Height = 23
           Top = 263
           Width = 72
           TabOrder = 10
@@ -917,5 +953,48 @@ object frmMain: TfrmMain
     OnTimer = tmrStartUpTimer
     left = 448
     top = 473
+  end
+  object menu_Main: TMainMenu
+    left = 509
+    top = 473
+    object menu_Com: TMenuItem
+      Caption = 'Com Ports'
+      object menu_SrcComOpenClose: TMenuItem
+        Caption = 'Source Com Open/Close'
+        ShortCut = 32817
+        OnClick = menu_SrcComOpenCloseClick
+      end
+      object menu_FwdComOpenClose: TMenuItem
+        Caption = 'Forward Com Open/Close'
+        ShortCut = 32818
+        OnClick = menu_FwdComOpenCloseClick
+      end
+    end
+    object menu_Log: TMenuItem
+      Caption = 'Log Menu'
+      object menu_ClearLogs: TMenuItem
+        Caption = 'Clear Logs'
+        ShortCut = 32835
+        OnClick = menu_ClearLogsClick
+      end
+      object menu_CopyTextLog: TMenuItem
+        Caption = 'Copy Text Log'
+        ShortCut = 32852
+        OnClick = menu_CopyTextLogClick
+      end
+      object menu_CopyHexLog: TMenuItem
+        Caption = 'Copy Hex Log'
+        ShortCut = 32840
+        OnClick = menu_CopyHexLogClick
+      end
+    end
+    object menu_Program: TMenuItem
+      Caption = 'Program'
+      object menu_Exit: TMenuItem
+        Caption = 'Exit'
+        ShortCut = 32856
+        OnClick = menu_ExitClick
+      end
+    end
   end
 end
