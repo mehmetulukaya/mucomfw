@@ -1,7 +1,7 @@
 object frmMain: TfrmMain
-  Left = 228
+  Left = 227
   Height = 537
-  Top = 71
+  Top = 116
   Width = 961
   Caption = 'Main'
   ClientHeight = 517
@@ -81,7 +81,6 @@ object frmMain: TfrmMain
             object grd_InstBaud: TStringGrid
               Left = 0
               Height = 72
-              Hint = 'Double click to change parameter'
               Top = 0
               Width = 337
               Align = alClient
@@ -171,7 +170,6 @@ object frmMain: TfrmMain
             object grd_InstDataBits: TStringGrid
               Left = 0
               Height = 72
-              Hint = 'Double click to change parameter'
               Top = 0
               Width = 75
               Align = alClient
@@ -219,7 +217,6 @@ object frmMain: TfrmMain
             object grd_InstParity: TStringGrid
               Left = 0
               Height = 72
-              Hint = 'Double click to change parameter'
               Top = 0
               Width = 95
               Align = alClient
@@ -270,7 +267,6 @@ object frmMain: TfrmMain
             object grd_InstStopBits: TStringGrid
               Left = 0
               Height = 72
-              Hint = 'Double click to change parameter'
               Top = 0
               Width = 76
               Align = alClient
@@ -509,20 +505,26 @@ object frmMain: TfrmMain
           Top = 32
           Width = 79
           ItemHeight = 15
-          ItemIndex = 2
+          ItemIndex = 1
           Items.Strings = (
             '110'
-            '200'
             '300'
             '600'
             '1200'
             '2400'
             '4800'
             '9600'
+            '14400'
             '19200'
             '38400'
+            '56000'
             '57600'
             '115200'
+            '128000'
+            '230400'
+            '256000'
+            '460800'
+            '921600'
           )
           Style = csDropDownList
           TabOrder = 1
@@ -737,20 +739,26 @@ object frmMain: TfrmMain
           Top = 32
           Width = 79
           ItemHeight = 15
-          ItemIndex = 2
+          ItemIndex = 1
           Items.Strings = (
             '110'
-            '200'
             '300'
             '600'
             '1200'
             '2400'
             '4800'
             '9600'
+            '14400'
             '19200'
             '38400'
+            '56000'
             '57600'
             '115200'
+            '128000'
+            '230400'
+            '256000'
+            '460800'
+            '921600'
           )
           Style = csDropDownList
           TabOrder = 1
