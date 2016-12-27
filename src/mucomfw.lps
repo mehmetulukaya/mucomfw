@@ -110,7 +110,7 @@
         <UsageCount Value="9"/>
       </Unit12>
     </Units>
-    <JumpHistory Count="30" HistoryIndex="29">
+    <JumpHistory Count="29" HistoryIndex="28">
       <Position1>
         <Filename Value="main.pas"/>
         <Caret Line="181" Column="3" TopLine="170"/>
@@ -224,12 +224,8 @@
       </Position28>
       <Position29>
         <Filename Value="main.pas"/>
-        <Caret Line="285" Column="3" TopLine="433"/>
-      </Position29>
-      <Position30>
-        <Filename Value="main.pas"/>
         <Caret Line="781" Column="48" TopLine="777"/>
-      </Position30>
+      </Position29>
     </JumpHistory>
   </ProjectSession>
 </CONFIG>
